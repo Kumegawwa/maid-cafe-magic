@@ -99,3 +99,53 @@ Pré-requisitos: Certifique-se de ter o **Node.js** instalado em sua máquina.
 ---
 
 ## 📂 Estrutura de Pastas
+
+
+```
+
+src/
+├── components/
+│   ├── home/          # Componentes exclusivos da Página Inicial (Hero, Instagram, CTA)
+│   ├── layout/        # Header, Footer
+│   ├── ui/            # Componentes reutilizáveis (Botões, Cards, Badges - Shadcn)
+│   └── ScrollToTop.tsx # Utilitário de navegação
+├── pages/             # Páginas principais (Rotas)
+│   ├── Index.tsx      # Home
+│   ├── CardapioPage.tsx
+│   ├── MaidsPage.tsx
+│   ├── ContatoPage.tsx
+│   ├── RegrasPage.tsx
+│   ├── EventosPage.tsx
+│   ├── ExperienciaPage.tsx
+│   └── NotFound.tsx
+├── lib/               # Utilitários globais (cn function)
+└── index.css          # Estilos globais e classes utilitárias 3D manuais
+
+```
+
+---
+
+## 📱 Responsividade
+
+O site é totalmente responsivo (Mobile-First):
+- **Mobile:** Menu hambúrguer lateral, grids de coluna única, elementos de toque otimizados.
+- **Desktop:** Navegação em pílula, grids expandidos, efeitos de hover avançados.
+
+---
+
+## 🤝 Contribuição
+
+Contribuições são bem-vindas! Se você tiver uma ideia para deixar o café ainda mais mágico:
+
+1.  Faça um Fork do projeto.
+2.  Crie uma Branch para sua Feature (`git checkout -b feature/NovaMagia`).
+3.  Faça o Commit (`git commit -m 'Adiciona Nova Magia'`).
+4.  Faça o Push (`git push origin feature/NovaMagia`).
+5.  Abra um Pull Request.
+
+---
+
+<div align="center">
+  <p>Feito com 💖 e muita magia para a comunidade Maid.</p>
+  <p>© 2024 Chest of Wonders</p>
+</div>
