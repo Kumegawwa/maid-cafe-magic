@@ -1,65 +1,73 @@
-import { Instagram, Heart } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Instagram } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
-// AGORA O SITE VAI CARREGAR AS IMAGENS DA SUA PASTA PUBLIC
-const INSTAGRAM_PHOTOS = [
-  "/instagram/foto1.jpg",
-  "/instagram/foto2.jpg",
-  "/instagram/foto3.jpg",
-  "/instagram/foto4.jpg",
-  "/instagram/foto5.jpg",
-  "/instagram/foto6.jpg",
-  "/instagram/foto7.jpg",
-  "/instagram/foto8.jpg",
-  "/instagram/foto9.jpg",
-];
+const InstagramFeed = () => {
+  // Lista completa com as 9 fotos que você subiu
+  const photos = [
+    { src: '/instagram/foto1.jpg', alt: 'Momento Mágico 1' },
+    { src: '/instagram/foto2.jpg', alt: 'Momento Mágico 2' },
+    { src: '/instagram/foto3.jpg', alt: 'Momento Mágico 3' },
+    { src: '/instagram/foto4.jpg', alt: 'Momento Mágico 4' },
+    { src: '/instagram/foto5.jpg', alt: 'Momento Mágico 5' },
+    { src: '/instagram/foto6.jpg', alt: 'Momento Mágico 6' },
+    { src: '/instagram/foto7.jpg', alt: 'Momento Mágico 7' },
+    { src: '/instagram/foto8.jpg', alt: 'Momento Mágico 8' },
+    { src: '/instagram/foto9.jpg', alt: 'Momento Mágico 9' },
+  ];
 
-export default function InstagramFeed() {
   return (
-    <section className="py-20 bg-white overflow-hidden relative">
-      <div className="container px-4 mb-10 text-center">
-        <div className="flex items-center justify-center gap-2 mb-4 text-chest-pink animate-bounce">
-            <Instagram size={24} />
-            <span className="font-bold">@chestmaids</span>
+    <section className="py-24 bg-white overflow-hidden">
+      {/* Estilo da animação injetado localmente */}
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          animation: marquee 40s linear infinite;
+        }
+        .animate-marquee:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
+
+      <div className="container mx-auto px-4 mb-12 text-center">
+        <div className="inline-flex items-center gap-2 bg-chest-pink/10 text-chest-pink px-4 py-1.5 rounded-full font-display font-bold text-sm uppercase tracking-wider mb-6 border-2 border-chest-pink/30">
+          <Instagram size={18} />
+          <span>@chestmaids</span>
         </div>
-        <h2 className="text-3xl md:text-5xl font-display font-bold text-chest-dark mb-4">
-          Registros dos <span className="text-transparent bg-clip-text bg-gradient-to-r from-chest-pink to-chest-purple">Nossos Mestres</span>
+        <h2 className="font-display text-4xl md:text-6xl font-black text-chest-dark">
+          Siga nossa <span className="text-chest-blue">Rotina Mágica</span>
         </h2>
-        <p className="text-gray-500 max-w-lg mx-auto">
-          Momentos mágicos compartilhados por quem viveu a experiência Chest of Wonders.
-          Marque a gente para aparecer aqui!
-        </p>
       </div>
 
-      {/* Carrossel Infinito Wrapper */}
-      <div className="relative w-full py-4 bg-chest-pink/5 -rotate-1 scale-105 border-y-4 border-white shadow-inner">
-        
-        {/* Track do Carrossel (Duplicado para efeito infinito) */}
-        {/* O 'group' aqui permite pausar a animação quando passa o mouse em QUALQUER lugar da faixa */}
-        <div className="flex w-max animate-marquee gap-6 hover:[animation-play-state:paused]">
-          
-          {/* Duplicamos a lista 3 vezes para garantir que o loop infinito não tenha buracos em telas grandes */}
-          {[...INSTAGRAM_PHOTOS, ...INSTAGRAM_PHOTOS, ...INSTAGRAM_PHOTOS].map((photo, index) => (
+      {/* Container do Carrossel Infinito */}
+      <div className="relative w-full">
+        {/* Gradientes laterais para suavizar as bordas */}
+        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+        <div className="flex w-fit animate-marquee">
+          {/* Renderiza as fotos DUAS vezes para criar o loop perfeito */}
+          {[...photos, ...photos].map((photo, idx) => (
             <div 
-              key={index} 
-              className="relative w-64 h-64 md:w-80 md:h-80 flex-shrink-0 rounded-2xl overflow-hidden shadow-lg group border-4 border-white bg-gray-100"
+              key={idx}
+              className="flex-shrink-0 w-64 md:w-80 px-4 group cursor-pointer"
             >
-              <img 
-                src={photo} 
-                alt={`Cliente Chest of Wonders ${index}`} 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                // Fallback para caso você esqueça de baixar alguma foto, não ficar um buraco branco
-                onError={(e) => {
-                    e.currentTarget.src = "https://placehold.co/600x600/ffa9d9/white?text=Chest+Maids";
-                }}
-              />
-              
-              {/* Overlay ao passar o mouse */}
-              <div className="absolute inset-0 bg-chest-dark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center cursor-pointer">
-                <div className="flex gap-4 text-white">
-                  <div className="flex items-center gap-1">
-                     <Heart className="fill-white w-6 h-6 animate-pulse" />
-                     <span className="font-bold">Ver no Insta</span>
+              <div className="aspect-square bg-white rounded-[2rem] p-3 border-4 border-chest-dark shadow-pop hover:shadow-none hover:translate-y-2 transition-all duration-300 relative overflow-hidden">
+                <div className="w-full h-full rounded-[1.5rem] overflow-hidden relative">
+                  <img 
+                    src={photo.src} 
+                    alt={photo.alt}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                      e.currentTarget.parentElement!.innerHTML = '<div class="w-full h-full bg-gray-100 flex items-center justify-center text-4xl">📸</div>';
+                    }}
+                  />
+                  {/* Overlay rosa ao passar o mouse */}
+                  <div className="absolute inset-0 bg-chest-pink/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <Instagram className="text-white w-12 h-12 drop-shadow-md transform scale-50 group-hover:scale-100 transition-transform" />
                   </div>
                 </div>
               </div>
@@ -68,15 +76,19 @@ export default function InstagramFeed() {
         </div>
       </div>
 
-      <div className="text-center mt-12">
+      <div className="text-center mt-16">
         <Button 
-            variant="outline"
-            className="border-2 border-chest-purple text-chest-purple hover:bg-chest-purple hover:text-white rounded-full px-8 py-6 text-lg shadow-md transition-all hover:-translate-y-1"
-            onClick={() => window.open('https://www.instagram.com/chestmaids/', '_blank')}
+          size="xl" 
+          className="bg-chest-dark hover:bg-chest-blue text-white font-display font-bold text-xl rounded-2xl shadow-pop hover:shadow-none hover:translate-y-1 transition-all px-10 h-16 border-2 border-chest-dark"
+          asChild
         >
-            Siga nosso Instagram
+          <a href="https://instagram.com/chestmaids" target="_blank" rel="noopener noreferrer">
+            Ver mais no Instagram
+          </a>
         </Button>
       </div>
     </section>
   );
-}
+};
+
+export default InstagramFeed;

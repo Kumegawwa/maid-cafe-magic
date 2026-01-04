@@ -6,78 +6,48 @@
 
 @layer base {
   :root {
-    /* Base Background - Branco Limpo */
     --background: 0 0% 100%;
-    /* Texto Principal - Pantone 426 C (#272727) */
-    --foreground: 0 0% 15%; 
-
-    /* Card Background - Branco */
+    --foreground: 0 0% 15%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 15%;
-
-    /* Popover - Branco */
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 15%;
-
-    /* Primary - Pantone 230 C (#ffa8da) - Rosa */
     --primary: 325 100% 83%;
-    --primary-foreground: 0 0% 15%; /* Texto escuro no rosa para contraste */
-
-    /* Secondary - Pantone 630 C (#73c5dd) - Azul */
+    --primary-foreground: 0 0% 15%;
     --secondary: 193 60% 66%;
     --secondary-foreground: 0 0% 15%;
-
-    /* Muted - Pantone 264 C (#bcadf0) - Roxo (usado como tom suave) */
     --muted: 253 65% 81%;
     --muted-foreground: 253 40% 40%;
-
-    /* Accent - Roxo ou Azul suave */
     --accent: 193 60% 90%;
     --accent-foreground: 0 0% 15%;
-
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-
-    --border: 253 65% 90%; /* Bordas roxinhas claras */
+    --border: 253 65% 90%;
     --input: 253 65% 90%;
-    --ring: 325 100% 83%; /* Anel de foco Rosa */
-
-    --radius: 1.5rem; /* Bordas bem arredondadas (24px) */
+    --ring: 325 100% 83%;
+    --radius: 1.5rem;
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground font-body;
-  }
-  /* Títulos com a fonte Fredoka */
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-display;
-  }
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground font-body; }
+  h1, h2, h3, h4, h5, h6 { @apply font-display; }
 }
 
-/* Utilitários de Animação e Estilo Pop */
 @layer utilities {
-  .shadow-pop {
-    box-shadow: 4px 4px 0px 0px rgba(39, 39, 39, 0.1);
-  }
-  .shadow-pop-hover {
-    box-shadow: 6px 6px 0px 0px rgba(39, 39, 39, 0.2);
-  }
-  .text-shadow-sm {
-    text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
-  }
-  
-  /* Gradientes Específicos do Redesign */
-  .bg-gradient-pop {
-    background: linear-gradient(135deg, #ffa8da 0%, #bcadf0 100%);
-  }
+  .shadow-pop { box-shadow: 4px 4px 0px 0px rgba(39, 39, 39, 0.1); }
+  .shadow-pop-hover { box-shadow: 6px 6px 0px 0px rgba(39, 39, 39, 0.2); }
+  .text-shadow-sm { text-shadow: 1px 1px 0px rgba(0,0,0,0.1); }
+  .bg-gradient-pop { background: linear-gradient(135deg, #ffa8da 0%, #bcadf0 100%); }
 
+  /* 3D Transform Utilities para os Cards das Maids */
   .perspective-1000 { perspective: 1000px; }
   .transform-style-3d { transform-style: preserve-3d; }
   .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
   .rotate-y-180 { transform: rotateY(180deg); }
+  
+  /* Utilitários para esconder barra de rolagem mas manter funcionalidade */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 }
