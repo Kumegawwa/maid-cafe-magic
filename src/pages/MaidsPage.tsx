@@ -1,222 +1,268 @@
+import { useState, useEffect } from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Badge } from '@/components/ui/badge';
-import { Heart, Sparkles, Star, Coffee } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Heart, Zap, Cloud, Eye, Sparkles, Sun, Smile, Coffee, Crown, Flame, Star, HelpCircle, MousePointerClick } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { cn } from '@/lib/utils';
 
 const MaidsPage = () => {
-  const maids = [
-    {
-      name: 'Maid Lillian',
-      personality: 'Deredere',
-      description: 'Sempre sorridente e calorosa, Lillian faz todos se sentirem em casa. Sua especialidade é criar arte no café que aquece o coração.',
-      specialty: 'Latte Art',
-      favoriteFood: 'Torta de Morango',
-      quote: '"Seu sorriso é minha maior recompensa, Mestre!"',
-      color: 'from-pink-400 to-rose-500',
-      traits: ['Carinhosa', 'Atenciosa', 'Alegre'],
-    },
-    {
-      name: 'Maid Miko',
-      personality: 'Kuudere',
-      description: 'De poucas palavras mas gestos significativos, Miko expressa seu carinho através de chás perfeitamente preparados.',
-      specialty: 'Chás Especiais',
-      favoriteFood: 'Mochi',
-      quote: '"...ficou delicioso. Para você."',
-      color: 'from-purple-400 to-indigo-500',
-      traits: ['Misteriosa', 'Elegante', 'Dedicada'],
-    },
-    {
-      name: 'Maid Ellie',
-      personality: 'Genki',
-      description: 'Uma explosão de energia e alegria! Ellie transforma cada momento em uma festa e suas sobremesas são pura magia.',
-      specialty: 'Sobremesas Mágicas',
-      favoriteFood: 'Cupcakes',
-      quote: '"Vamos fazer magia juntos hoje, Mestre!"',
-      color: 'from-amber-400 to-orange-500',
-      traits: ['Energética', 'Divertida', 'Criativa'],
-    },
-    {
-      name: 'Maid Sakura',
-      personality: 'Tsundere',
-      description: 'Pode parecer fria no início, mas por baixo dessa fachada existe um coração que se importa profundamente.',
-      specialty: 'Frapês Especiais',
-      favoriteFood: 'Taiyaki',
-      quote: '"N-não é como se eu tivesse feito isso especialmente pra você!"',
-      color: 'from-red-400 to-pink-500',
-      traits: ['Determinada', 'Honesta', 'Leal'],
-    },
-    {
-      name: 'Maid Luna',
-      personality: 'Dandere',
-      description: 'Tímida e gentil, Luna se abre aos poucos revelando uma doçura incomparável em cada interação.',
-      specialty: 'Drinks sem Álcool',
-      favoriteFood: 'Pudim',
-      quote: '"E-espero que goste... fiz com muito carinho..."',
-      color: 'from-blue-400 to-cyan-500',
-      traits: ['Tímida', 'Gentil', 'Observadora'],
-    },
-    {
-      name: 'Mordomo Kai',
-      personality: 'Cavalheiro',
-      description: 'Elegante e cortês, Kai trata cada visitante com o respeito e a atenção dignos da nobreza.',
-      specialty: 'Café Clássico',
-      favoriteFood: 'Croissant',
-      quote: '"É uma honra servi-lo, Mestre."',
-      color: 'from-slate-500 to-slate-700',
-      traits: ['Elegante', 'Protetor', 'Refinado'],
-    },
-  ];
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-  const personalities = [
-    { name: 'Deredere', emoji: '💕', description: 'Amorosa e carinhosa desde o primeiro momento. Expressa afeto abertamente.' },
-    { name: 'Tsundere', emoji: '💢', description: 'Fria por fora, mas gentil por dentro. O afeto vem aos poucos.' },
-    { name: 'Kuudere', emoji: '❄️', description: 'Calma e de poucas palavras, mas demonstra carinho de formas sutis.' },
-    { name: 'Genki', emoji: '⚡', description: 'Energia pura! Sempre animada e positiva, contagia a todos.' },
-    { name: 'Dandere', emoji: '🌸', description: 'Tímida no início, mas se abre revelando grande doçura.' },
-    { name: 'Cavalheiro', emoji: '🎩', description: 'Elegante e cortês, com modos refinados e atenção impecável.' },
+  const PERSONALITIES = [
+    {
+      id: "deredere",
+      name: "Deredere",
+      description: "Sempre gentil e super kawaii, trazendo a experiência de fofura mais clássica do nosso maid café!",
+      dialogue: "Kyaa! Amor, felicidade e bondade acima de tudo! Pode contar comigo Mestre!",
+      color: "bg-pink-100",
+      border: "border-pink-300",
+      text: "text-pink-600",
+      icon: Heart
+    },
+    {
+      id: "tsundere",
+      name: "Tsundere",
+      description: "Se irrita fácil e pode ser durona mas no fundo, no fundo é porque gosta de você. Então seja gentil!",
+      dialogue: "N-não vou dizer o que estou sentindo! B-baka!",
+      color: "bg-orange-100",
+      border: "border-orange-300",
+      text: "text-orange-600",
+      icon: Zap
+    },
+    {
+      id: "dandere",
+      name: "Dandere",
+      description: "Mesmo tendo muita timidez, sempre vai te receber com dedicação e carinho!",
+      dialogue: "Sei que sou tímida demais pra falar... mas você vê meus sentimentos... não é, Mestre?",
+      color: "bg-indigo-100",
+      border: "border-indigo-300",
+      text: "text-indigo-600",
+      icon: Cloud
+    },
+    {
+      id: "yandere",
+      name: "Yandere",
+      description: "Te adora tanto, que seu ciúme doentio pode ser perigoso para quem estiver por perto!",
+      dialogue: "Você não precisa de amigos, Mestre. Eu já me livrei deles pra você ♡",
+      color: "bg-red-100",
+      border: "border-red-400",
+      text: "text-red-700",
+      icon: Eye
+    },
+    {
+      id: "mahou",
+      name: "Mahou",
+      description: "Vai te ajudar a proteger o mundo das forças do mal como uma verdadeira garota mágica!",
+      dialogue: "Pelo poder do Frap Estelar~! Sou sua Maid e vou servir você em nome da Lua!",
+      color: "bg-purple-100",
+      border: "border-purple-300",
+      text: "text-purple-600",
+      icon: Sparkles
+    },
+    {
+      id: "genki",
+      name: "Genki",
+      description: "Muita energia e positividade! Levanta dessa cadeira e vem fazer a magia mais animada de todas!",
+      dialogue: "Vamos lá Mestre! De pé!!! É hora de se movimentar!",
+      color: "bg-yellow-100",
+      border: "border-yellow-300",
+      text: "text-yellow-600",
+      icon: Sun
+    },
+    {
+      id: "imouto",
+      name: "Imouto",
+      description: "Uma irmãzinha caçula fofa e animada, que te admira e está sempre querendo te alegrar!",
+      dialogue: "Onii-chan! Tô tão feliz que você veio me visitar hoje!!",
+      color: "bg-rose-100",
+      border: "border-rose-300",
+      text: "text-rose-600",
+      icon: Smile
+    },
+    {
+      id: "oneesan",
+      name: "Oneesan",
+      description: "Super atenciosa e preocupada, vai cuidar de você como uma irmã mais velha!",
+      dialogue: "Ara ara~ Precisa de ajuda, pequenino? Vou cuidar de você~",
+      color: "bg-violet-100",
+      border: "border-violet-300",
+      text: "text-violet-700",
+      icon: Coffee
+    },
+    {
+      id: "oujidere",
+      name: "Oujidere",
+      description: "Refinado e com aparência impecável de um príncipe. Talvez aja como um lord gentil ou talvez te despreze.",
+      dialogue: "Apenas um príncipe saberá como tratar outros membros da realeza.",
+      color: "bg-amber-100",
+      border: "border-amber-300",
+      text: "text-amber-700",
+      icon: Crown
+    },
+    {
+      id: "sadistic",
+      name: "Sadistic",
+      description: "Esqueça a fofura... Se prepare para obedecer os caprichos de uma maid que só quer se divertir ao te humilhar!",
+      dialogue: "Como ousa me dar ordens? Quem dá as ordens aqui SOU EU!",
+      color: "bg-gray-900",
+      border: "border-gray-950",
+      text: "text-red-500", 
+      icon: Flame
+    },
+    {
+      id: "kamidere",
+      name: "Kamidere",
+      description: "Para ter a honra do atendimento de uma divindade nessa terra, coloque-se no seu lugar como um reles mortal!",
+      dialogue: "Como ousa exigir o atendimento de uma deusa??! Mas é claro, eu sou incrível mesmo!",
+      color: "bg-yellow-50",
+      border: "border-yellow-400",
+      text: "text-yellow-600",
+      icon: Star
+    },
+    {
+      id: "bakadere",
+      name: "Bakadere",
+      description: "Pequenas confusões e piadas ruins podem acontecer, mas é tudo parte da diversão!",
+      dialogue: "Aa-Waa!! Desculpe Mestre! Sou muito desajeitada mesmo ><'",
+      color: "bg-blue-100",
+      border: "border-blue-300",
+      text: "text-blue-600",
+      icon: HelpCircle
+    },
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <Header />
-      <main className="pt-24">
-        {/* Hero */}
-        <section className="py-16 bg-gradient-to-b from-dusty-rose-light/20 to-background">
-          <div className="container mx-auto px-4 text-center">
-            <Badge variant="gold" className="mb-4">O Elenco</Badge>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-              Habitantes da <span className="text-gradient-pink">Mansão</span>
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Conheça as Maids e Mordomos que tornam cada visita ao Chest of Wonders uma experiência inesquecível.
-            </p>
+      
+      <main className="pt-24 lg:pt-32 pb-20">
+        <section className="container mx-auto px-4 text-center mb-12">
+          <Badge className="bg-chest-pink text-chest-dark border-2 border-chest-dark shadow-pop-sm mb-4 text-sm font-display font-bold px-4 py-1">
+            Nossa Equipe
+          </Badge>
+          <h1 className="font-display text-5xl md:text-6xl font-black text-chest-dark mb-6">
+            Escolha sua <span className="text-chest-blue">Personalidade</span>
+          </h1>
+          <p className="text-chest-dark/70 font-body text-xl max-w-2xl mx-auto font-medium leading-relaxed">
+            No Chest of Wonders, o atendimento é uma atração à parte! 
+            Você pode escolher qual "Dere Type" irá te servir.
+          </p>
+        </section>
+
+        {/* Aviso de Interação */}
+        <div className="container mx-auto px-4 mb-8 flex justify-center animate-bounce">
+          <div className="inline-flex items-center gap-2 bg-chest-purple text-white px-6 py-2 rounded-full font-display font-bold shadow-pop-sm border-2 border-chest-dark">
+            <MousePointerClick className="w-5 h-5" />
+            <span>Clique na carta para ver a reação!</span>
+          </div>
+        </div>
+
+        {/* Grid de Cartas */}
+        <section className="container mx-auto px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {PERSONALITIES.map((persona) => (
+              <PersonalityCard key={persona.id} data={persona} />
+            ))}
           </div>
         </section>
 
-        {/* Maids Grid */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {maids.map((maid, index) => (
-                <div
-                  key={index}
-                  className="group bg-card rounded-3xl overflow-hidden shadow-card hover:shadow-elevated transition-all duration-300"
-                >
-                  {/* Avatar */}
-                  <div className={`h-48 bg-gradient-to-br ${maid.color} flex items-center justify-center relative`}>
-                    <span className="text-8xl opacity-90">👩‍🍳</span>
-                    <div className="absolute bottom-3 right-3">
-                      <Badge variant="outline" className="bg-card/90 backdrop-blur-sm text-xs">
-                        {maid.personality}
-                      </Badge>
-                    </div>
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="p-6">
-                    <h3 className="font-display text-xl font-bold text-foreground mb-2">
-                      {maid.name}
-                    </h3>
-                    
-                    <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                      {maid.description}
-                    </p>
-
-                    {/* Stats */}
-                    <div className="space-y-2 mb-4">
-                      <div className="flex items-center gap-2 text-sm">
-                        <Sparkles size={14} className="text-gold" />
-                        <span className="text-muted-foreground">Especialidade:</span>
-                        <span className="font-medium text-foreground">{maid.specialty}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm">
-                        <Coffee size={14} className="text-primary" />
-                        <span className="text-muted-foreground">Favorito:</span>
-                        <span className="font-medium text-foreground">{maid.favoriteFood}</span>
-                      </div>
-                    </div>
-
-                    {/* Traits */}
-                    <div className="flex flex-wrap gap-1 mb-4">
-                      {maid.traits.map((trait, i) => (
-                        <Badge key={i} variant="pink" className="text-xs">
-                          {trait}
-                        </Badge>
-                      ))}
-                    </div>
-
-                    {/* Quote */}
-                    <p className="text-sm italic text-muted-foreground border-l-2 border-primary/30 pl-3">
-                      {maid.quote}
-                    </p>
-
-                    {/* Status */}
-                    <div className="mt-4 pt-4 border-t border-border flex items-center justify-between">
-                      <div className="flex items-center gap-1.5 text-xs text-green-600">
-                        <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                        Na Mansão
-                      </div>
-                      <Heart 
-                        size={18} 
-                        className="text-primary/40 group-hover:text-primary group-hover:scale-110 transition-all cursor-pointer" 
-                      />
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Personality Guide */}
-        <section className="py-16 bg-lace parchment-texture">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <span className="text-gold text-2xl mb-4 block">📖</span>
-              <h2 className="font-display text-3xl font-bold text-foreground mb-4">
-                Guia de Personalidades
-              </h2>
-              <p className="text-muted-foreground max-w-xl mx-auto">
-                Cada Maid tem uma personalidade única inspirada em arquétipos da cultura japonesa.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
-              {personalities.map((p, index) => (
-                <div
-                  key={index}
-                  className="bg-card rounded-xl p-5 shadow-soft border border-border hover:border-gold/30 transition-all"
-                >
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="text-2xl">{p.emoji}</span>
-                    <h3 className="font-display font-semibold text-foreground">{p.name}</h3>
-                  </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {p.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Join Team CTA */}
-        <section className="py-16 bg-secondary text-secondary-foreground">
-          <div className="container mx-auto px-4 text-center">
-            <span className="text-3xl mb-4 block">🎀</span>
-            <h2 className="font-display text-3xl font-bold mb-4">
-              Quer fazer parte da Mansão?
+        {/* CTA Footer */}
+        <section className="container mx-auto px-4 mt-20 text-center">
+          <div className="bg-chest-purple/10 rounded-[3rem] p-12 border-4 border-chest-purple dashed">
+            <h2 className="font-display text-3xl font-bold text-chest-dark mb-4">
+              Já sabe quem vai chamar?
             </h2>
-            <p className="opacity-80 mb-6 max-w-lg mx-auto">
-              Estamos sempre em busca de novos talentos para se juntarem à nossa família encantada.
+            <p className="font-body text-lg text-chest-dark/70 mb-8">
+              Avise sua preferência na hora do pedido ou deixe a sorte decidir!
             </p>
-            <p className="text-sm opacity-60">
-              Entre em contato pelo Instagram para saber sobre vagas abertas.
-            </p>
+            <Button size="xl" className="bg-chest-blue hover:bg-chest-blue/90 text-white font-display font-bold text-xl rounded-2xl shadow-pop hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all border-2 border-chest-dark px-10 h-16" asChild>
+              <Link to="/contato">
+                Reservar Mesa
+              </Link>
+            </Button>
           </div>
         </section>
       </main>
+
       <Footer />
+    </div>
+  );
+};
+
+// --- Componente de Carta 3D (Flip Card) ---
+const PersonalityCard = ({ data }: { data: any }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  return (
+    // Container Principal (Define o espaço da carta)
+    <div 
+      className="group h-[380px] w-full cursor-pointer perspective-1000"
+      onClick={() => setIsFlipped(!isFlipped)}
+    >
+      {/* Container Rotativo (Gira dentro do espaço) */}
+      <div 
+        className={cn(
+          "relative w-full h-full transition-transform duration-700 transform-style-3d shadow-pop rounded-[2.5rem]",
+          isFlipped ? "rotate-y-180" : ""
+        )}
+      >
+        {/* --- FRENTE (Visível inicialmente) --- */}
+        <div className={cn(
+          "absolute inset-0 w-full h-full backface-hidden rounded-[2.5rem] border-4 p-8 flex flex-col items-center justify-between overflow-hidden bg-white z-10",
+          data.border
+        )}>
+          {/* Header Frente */}
+          <div className="text-center z-10 w-full">
+            <div className={cn("w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 border-2 shadow-sm bg-white", data.border)}>
+              <data.icon className={cn("w-8 h-8", data.text)} />
+            </div>
+            <h3 className={cn("font-display text-3xl font-black mb-4", data.id === 'sadistic' ? 'text-gray-900' : 'text-chest-dark')}>
+              {data.name}
+            </h3>
+          </div>
+
+          {/* Texto Frente */}
+          <p className="text-center font-body font-medium text-lg text-gray-600 leading-relaxed z-10">
+            {data.description}
+          </p>
+
+          {/* Dica visual para virar */}
+          <div className="absolute bottom-4 right-4 animate-pulse">
+             <MousePointerClick className="w-6 h-6 text-chest-dark/20" />
+          </div>
+
+          {/* Background Decorativo Frente */}
+          <div className={cn("absolute inset-0 opacity-20 -z-0", data.color)} />
+        </div>
+
+        {/* --- VERSO (Escondido inicialmente, aparece ao girar) --- */}
+        <div className={cn(
+          "absolute inset-0 w-full h-full backface-hidden rotate-y-180 rounded-[2.5rem] border-4 p-8 flex flex-col items-center justify-center text-center overflow-hidden bg-white",
+          data.border
+        )}>
+          {/* Icone decorativo fundo */}
+          <data.icon className={cn("absolute w-64 h-64 opacity-10 rotate-12 -bottom-10 -right-10", data.text)} />
+          
+          <div className="relative z-10">
+            <span className={cn("absolute -top-8 -left-4 text-8xl font-display opacity-20 select-none", data.text)}>"</span>
+            <p className={cn("font-display text-2xl font-bold italic leading-relaxed px-2", 
+              data.id === 'sadistic' ? 'text-red-600' : 'text-chest-dark'
+            )}>
+              {data.dialogue}
+            </p>
+            <span className={cn("absolute -bottom-12 -right-4 text-8xl font-display opacity-20 select-none", data.text)}>"</span>
+          </div>
+
+          <div className={cn("absolute top-0 left-0 w-full h-2", data.color.replace('bg-', 'bg-').replace('100', '400'))} />
+          <p className="absolute bottom-6 text-xs uppercase font-bold tracking-widest opacity-50">
+            Exemplo de Atendimento
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

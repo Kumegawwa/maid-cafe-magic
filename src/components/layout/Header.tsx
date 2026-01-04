@@ -1,148 +1,172 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Menu, X, Clock, MapPin } from 'lucide-react';
+import { Menu, X, Clock, MapPin, Sparkles } from 'lucide-react';
+import { cn } from '@/lib/utils';
+
+const checkIsOpen = () => {
+  const now = new Date();
+  const day = now.getDay();
+  const minutes = now.getHours() * 60 + now.getMinutes();
+  const OPEN = 11 * 60;
+  const CLOSE = 18 * 60 + 30;
+  if (day === 1) return false;
+  return minutes >= OPEN && minutes <= CLOSE;
+};
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  // Check if currently open (Tue-Sun 11:00-18:30)
-  const getIsOpen = () => {
-    const now = new Date();
-    const day = now.getDay();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const currentTime = hours * 60 + minutes;
-    const openTime = 11 * 60; // 11:00
-    const closeTime = 18 * 60 + 30; // 18:30
-    
-    // Closed on Mondays (day === 1)
-    if (day === 1) return false;
-    return currentTime >= openTime && currentTime <= closeTime;
-  };
-
-  const isOpen = getIsOpen();
-
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    setIsOpen(checkIsOpen());
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
+
   const navLinks = [
-    { path: '/', label: 'Portal' },
-    { path: '/experiencia', label: 'A Experiência' },
-    { path: '/cardapio', label: 'Menu Mágico' },
-    { path: '/maids', label: 'Habitantes' },
+    { path: '/', label: 'Início' },
+    { path: '/experiencia', label: 'Experiência' },
+    { path: '/cardapio', label: 'Cardápio' },
+    { path: '/maids', label: 'Maids' },
     { path: '/eventos', label: 'Eventos' },
-    { path: '/contato', label: 'Visite-nos' },
+    { path: '/regras', label: 'Regras' },
+    { path: '/contato', label: 'Contato' },
   ];
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
-          ? 'bg-card/95 backdrop-blur-md shadow-card'
-          : 'bg-transparent'
-      }`}
+          ? "bg-white/90 backdrop-blur-md shadow-pop-sm py-2 border-b-4 border-chest-pink"
+          : "bg-transparent py-4"
+      )}
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-gold flex items-center justify-center shadow-gold">
-              <span className="text-2xl">🗝️</span>
+        <div className="flex items-center justify-between h-16">
+          {/* Logo Pop Style */}
+          <Link to="/" className="flex items-center gap-3 group relative z-50">
+            <div className="relative w-12 h-12 rounded-full border-4 border-chest-blue bg-white overflow-hidden shadow-pop group-hover:scale-110 transition-transform">
+               <img 
+                  src="/logo.png" 
+                  alt="Chest of Wonders" 
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                    e.currentTarget.parentElement!.innerHTML = '<span class="text-2xl flex items-center justify-center h-full">🧁</span>';
+                  }}
+                />
             </div>
             <div className="hidden sm:block">
-              <h1 className="font-display text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
+              <h1 className="font-display text-2xl font-bold text-chest-dark tracking-wide group-hover:text-chest-pink transition-colors">
                 Chest of Wonders
               </h1>
-              <p className="text-xs text-muted-foreground -mt-0.5">Maid Café</p>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
+          {/* Desktop Nav - Pill Style */}
+          <nav className="hidden lg:flex items-center gap-2 bg-white px-2 py-2 rounded-full border-2 border-chest-purple shadow-pop-sm">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`px-4 py-2 rounded-lg font-body text-sm transition-all duration-200 ${
+                className={cn(
+                  "px-4 py-1.5 rounded-full font-display text-sm font-bold transition-all duration-200",
                   location.pathname === link.path
-                    ? 'bg-primary/10 text-primary font-medium'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                }`}
+                    ? "bg-chest-pink text-chest-dark shadow-sm transform -translate-y-0.5"
+                    : "text-chest-dark/70 hover:text-chest-dark hover:bg-chest-purple/20"
+                )}
               >
                 {link.label}
               </Link>
             ))}
           </nav>
 
-          {/* Status & CTA */}
-          <div className="flex items-center gap-3">
-            <Badge variant={isOpen ? 'status' : 'closed'} className="hidden sm:flex items-center gap-1.5">
-              <span className={`w-2 h-2 rounded-full ${isOpen ? 'bg-green-500' : 'bg-red-500'} animate-pulse`} />
-              {isOpen ? 'Aberto Agora' : 'Fechado'}
-            </Badge>
+          {/* Actions */}
+          <div className="flex items-center gap-3 relative z-50">
+            {/* Status Pill */}
+            <div className={cn(
+              "hidden sm:flex items-center gap-2 px-4 py-1.5 rounded-full border-2 text-xs font-bold shadow-pop-sm",
+              isOpen 
+                ? "bg-green-100 border-green-400 text-green-700" 
+                : "bg-red-100 border-red-400 text-red-700"
+            )}>
+              <span className={cn(
+                "w-2 h-2 rounded-full",
+                isOpen ? "bg-green-500 animate-pulse" : "bg-red-500"
+              )} />
+              {isOpen ? 'Aberto!' : 'Fechado'}
+            </div>
             
-            <Button variant="mansion" size="sm" className="hidden md:flex" asChild>
-              <Link to="/contato">Reservar Mesa</Link>
+            <Button className="hidden md:flex bg-chest-blue text-chest-dark font-display font-bold border-2 border-chest-dark shadow-pop hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all rounded-full" asChild>
+              <Link to="/contato">
+                Reservar
+              </Link>
             </Button>
 
-            {/* Mobile Menu Toggle */}
+            {/* Mobile Toggle */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors"
-              aria-label="Toggle menu"
+              className="lg:hidden p-2 rounded-full bg-chest-purple/20 text-chest-dark hover:bg-chest-purple/40 transition-colors"
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="lg:hidden bg-card border-t border-border animate-fade-in">
-          <div className="container mx-auto px-4 py-4">
-            <nav className="flex flex-col gap-2">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`px-4 py-3 rounded-lg font-body text-base transition-all ${
-                    location.pathname === link.path
-                      ? 'bg-primary/10 text-primary font-medium'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-            
-            <div className="mt-4 pt-4 border-t border-border flex flex-col gap-3">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Clock size={16} />
-                <span>Terça a Domingo, 11:00 - 18:30</span>
+      {/* Mobile Menu - Pop Overlay */}
+      <div className={cn(
+        "fixed inset-0 z-40 bg-white transition-all duration-500 lg:hidden flex flex-col pt-24 px-6",
+        isMenuOpen ? "opacity-100 pointer-events-auto translate-y-0" : "opacity-0 pointer-events-none -translate-y-4"
+      )}>
+        {/* Background blobs decorativos */}
+        <div className="absolute top-0 right-0 w-40 h-40 bg-chest-pink/20 rounded-full blur-3xl -z-10" />
+        <div className="absolute bottom-0 left-0 w-40 h-40 bg-chest-blue/20 rounded-full blur-3xl -z-10" />
+
+        <nav className="flex flex-col gap-3">
+          {navLinks.map((link, idx) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              className={cn(
+                "flex items-center justify-between p-4 rounded-2xl border-2 border-chest-purple/30 text-chest-dark font-display text-xl font-bold transition-all",
+                location.pathname === link.path ? "bg-chest-pink/20 border-chest-pink" : "hover:bg-chest-purple/10"
+              )}
+            >
+              {link.label}
+              {location.pathname === link.path && <Sparkles className="text-chest-pink" />}
+            </Link>
+          ))}
+        </nav>
+        
+        <div className="mt-auto mb-8 space-y-4">
+          <div className="p-4 rounded-2xl bg-chest-blue/10 border-2 border-chest-blue space-y-3">
+            <div className="flex items-center gap-3">
+              <Clock className="text-chest-blue" />
+              <div className="text-sm font-body font-semibold">
+                <p>Terça a Domingo</p>
+                <p>11:00 - 18:30</p>
               </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <MapPin size={16} />
-                <span>Rua Galvão Bueno, 580 - Liberdade</span>
-              </div>
-              <Button variant="mansion" className="w-full mt-2" asChild>
-                <Link to="/contato">Reservar Mesa</Link>
-              </Button>
+            </div>
+            <div className="flex items-center gap-3">
+              <MapPin className="text-chest-blue" />
+              <p className="text-sm font-body font-semibold">Rua Galvão Bueno, 580</p>
             </div>
           </div>
+          <Button className="w-full py-6 text-lg rounded-xl bg-chest-pink text-chest-dark border-2 border-chest-dark shadow-pop font-display font-bold" asChild>
+            <Link to="/contato">Fazer Reserva</Link>
+          </Button>
         </div>
-      )}
+      </div>
     </header>
   );
 };

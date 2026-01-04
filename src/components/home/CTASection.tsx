@@ -1,81 +1,41 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Calendar, MapPin, Clock, Phone } from 'lucide-react';
+import { CalendarCheck, Sparkles } from 'lucide-react';
 
 const CTASection = () => {
   return (
-    <section className="py-20 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-secondary via-chocolate to-secondary" />
-      <div className="absolute inset-0 lace-pattern opacity-10" />
-      
-      <div className="relative z-10 container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center text-secondary-foreground">
-          {/* Decorative */}
-          <span className="text-gold text-3xl mb-6 block">🗝️</span>
+    <section className="py-24 px-4">
+      <div className="container mx-auto">
+        <div className="relative bg-chest-purple rounded-[3rem] p-10 md:p-20 text-center overflow-hidden border-4 border-chest-dark shadow-pop">
           
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
-            Pronto para entrar na{' '}
-            <span className="text-dusty-rose">Mansão</span>?
-          </h2>
+          {/* Decorações de Fundo */}
+          <div className="absolute top-0 left-0 w-80 h-80 bg-white/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 right-0 w-80 h-80 bg-chest-pink/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+          <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay pointer-events-none" />
           
-          <p className="text-lg opacity-90 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Nos fins de semana e feriados, trabalhamos apenas com reservas. 
-            Garanta seu lugar e venha viver uma experiência única!
-          </p>
-
-          {/* Info Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
-            <div className="bg-secondary-foreground/10 backdrop-blur-sm rounded-xl p-4 border border-secondary-foreground/20">
-              <Clock className="w-6 h-6 mx-auto mb-2 text-gold" />
-              <p className="text-sm font-medium">Terça a Domingo</p>
-              <p className="text-xs opacity-80">11:00 - 18:30</p>
+          <div className="relative z-10 max-w-4xl mx-auto space-y-10">
+            <div className="inline-block p-4 bg-white/20 backdrop-blur-sm rounded-3xl mb-2 border border-white/30 shadow-lg rotate-3 hover:rotate-0 transition-transform duration-500">
+              <Sparkles className="w-10 h-10 text-white animate-pulse" />
             </div>
-            <div className="bg-secondary-foreground/10 backdrop-blur-sm rounded-xl p-4 border border-secondary-foreground/20">
-              <MapPin className="w-6 h-6 mx-auto mb-2 text-gold" />
-              <p className="text-sm font-medium">Liberdade, SP</p>
-              <p className="text-xs opacity-80">Rua Galvão Bueno, 580</p>
+            
+            <h2 className="font-display text-5xl md:text-7xl font-black text-white leading-tight drop-shadow-md">
+              Pronto para viver <br/> essa magia?
+            </h2>
+            
+            <p className="font-body text-xl md:text-2xl text-white/90 font-medium leading-relaxed max-w-2xl mx-auto">
+              As mesas são limitadas e a procura é mágica! Garanta seu lugar no Chest of Wonders agora mesmo e evite filas.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row justify-center gap-6 pt-6">
+              <Button size="xl" className="bg-white text-chest-purple border-2 border-chest-dark hover:bg-gray-100 rounded-2xl shadow-[0_4px_0_0_rgba(39,39,39,1)] hover:shadow-none hover:translate-y-[4px] transition-all font-display font-bold text-xl h-20 px-12" asChild>
+                <Link to="/contato">
+                  <CalendarCheck className="mr-3 w-7 h-7" /> 
+                  Fazer Reserva Agora
+                </Link>
+              </Button>
             </div>
-            <div className="bg-secondary-foreground/10 backdrop-blur-sm rounded-xl p-4 border border-secondary-foreground/20">
-              <Calendar className="w-6 h-6 mx-auto mb-2 text-gold" />
-              <p className="text-sm font-medium">Reservas Abertas</p>
-              <p className="text-xs opacity-80">Fins de semana obrigatório</p>
-            </div>
-          </div>
-
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button 
-              variant="gold" 
-              size="xl" 
-              asChild
-              className="min-w-[200px]"
-            >
-              <Link to="/contato">
-                <span className="mr-2">🎀</span>
-                Reservar Agora
-              </Link>
-            </Button>
-            <Button 
-              variant="outline" 
-              size="xl" 
-              asChild
-              className="min-w-[200px] border-secondary-foreground/30 text-secondary-foreground hover:bg-secondary-foreground/10"
-            >
-              <Link to="/contato">
-                <MapPin size={18} className="mr-2" />
-                Como Chegar
-              </Link>
-            </Button>
           </div>
         </div>
-      </div>
-
-      {/* Decorative Bottom */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-12 fill-background">
-          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C74.22,101.6,148.24,86.79,213.4,62.05,236.71,53.66,259.79,44.6,283,36.36" />
-        </svg>
       </div>
     </section>
   );

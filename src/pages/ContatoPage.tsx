@@ -3,373 +3,176 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { MapPin, Clock, Phone, Instagram, Calendar, Navigation, AlertCircle, CheckCircle } from 'lucide-react';
+import { MapPin, Clock, Instagram, Send, Mail, CalendarCheck, Facebook } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { cn } from '@/lib/utils';
+
+// ... (Mantenha os ícones SVG do Discord/TikTok/X que você já tinha)
+// Vou omiti-los aqui para brevidade, mas devem ser mantidos no arquivo final.
+const DiscordIcon = ({ className }: { className?: string }) => (<svg viewBox="0 0 24 24" fill="currentColor" className={className}><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037 13.48 13.48 0 0 0-.59 1.227 18.3 18.3 0 0 0-7.163 0 13.48 13.48 0 0 0-.59-1.227.074.074 0 0 0-.079-.037A19.736 19.736 0 0 0 2.063 4.37c-.01 0-.019.01-.027.02C.1 7.35.35 10.286 1.135 13.138a.08.08 0 0 0 .034.053 19.898 19.898 0 0 0 5.996 3.027.077.077 0 0 0 .084-.027 14.16 14.16 0 0 0 1.225-1.993.076.076 0 0 0-.041-.106 9.13 9.13 0 0 1-2.906-1.393.076.076 0 0 1 .015-.127c.23-.173.456-.356.67-.547a.077.077 0 0 1 .082-.012 13.018 13.018 0 0 0 10.748 0 .077.077 0 0 1 .082.012c.214.191.44.374.67.547a.076.076 0 0 1 .015.127 9.08 9.08 0 0 1-2.906 1.393.076.076 0 0 0-.041.106 14.16 14.16 0 0 0 1.225 1.993.076.076 0 0 0 .084.027 19.91 19.91 0 0 0 6.002-3.027.077.077 0 0 0 .033-.052c.767-2.825 1.01-5.733-.896-8.723a.075.075 0 0 0-.026-.02z"/></svg>);
+const TikTokIcon = ({ className }: { className?: string }) => (<svg viewBox="0 0 24 24" fill="currentColor" className={className}><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>);
+const XIcon = ({ className }: { className?: string }) => (<svg viewBox="0 0 24 24" fill="currentColor" className={className}><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>);
 
 const ContatoPage = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    date: '',
-    time: '',
-    guests: '2',
-    message: '',
-  });
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+
+  const handleReserva = () => {
+    window.open("https://dguests.com/reserva_mesa/chestmaids", "_blank");
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1500));
-    
     toast({
-      title: "Solicitação enviada!",
-      description: "Entraremos em contato em breve para confirmar sua reserva.",
+      title: "Mensagem enviada com sucesso!",
+      description: "Nossas Maids responderão assim que possível.",
+      className: "bg-chest-pink text-chest-dark border-2 border-chest-dark shadow-pop",
     });
-    
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      date: '',
-      time: '',
-      guests: '2',
-      message: '',
-    });
+    setFormData({ name: '', email: '', subject: '', message: '' });
     setIsSubmitting(false);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <Header />
-      <main className="pt-24">
-        {/* Hero */}
-        <section className="py-16 bg-gradient-to-b from-dusty-rose-light/20 to-background">
-          <div className="container mx-auto px-4 text-center">
-            <Badge variant="gold" className="mb-4">Visite-nos</Badge>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-              Sua <span className="text-gradient-pink">Mesa</span> te Espera
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Reserve sua visita e venha viver uma experiência única na Mansão.
-            </p>
+      <main className="pt-24 pb-16 container mx-auto px-4">
+        
+        {/* Banner de Contato */}
+        <div className="text-center mb-12">
+          <Badge className="bg-chest-purple text-white mb-2 font-display text-sm px-4 py-1 rounded-full">Fale Conosco</Badge>
+          <h1 className="font-display text-5xl font-black text-chest-dark">
+            Entre em <span className="text-chest-pink">Contato</span>
+          </h1>
+        </div>
+
+        {/* Card Reserva */}
+        <div className="bg-gradient-pop rounded-3xl p-8 mb-12 shadow-pop flex flex-col md:flex-row items-center justify-between text-chest-dark border-4 border-white">
+          <div className="flex items-center gap-4 mb-6 md:mb-0">
+            <div className="bg-white p-4 rounded-full shadow-sm text-chest-purple">
+              <CalendarCheck size={32} />
+            </div>
+            <div>
+              <h3 className="font-display text-2xl font-bold">Quer reservar sua mesa?</h3>
+              <p className="font-body font-medium opacity-80">Garanta seu lugar na mansão pelo sistema oficial.</p>
+            </div>
           </div>
-        </section>
+          <Button onClick={handleReserva} size="xl" className="bg-white text-chest-purple border-2 border-chest-purple hover:bg-chest-purple hover:text-white rounded-2xl shadow-pop-sm font-display font-bold">
+            Ir para Reservas
+          </Button>
+        </div>
 
-        {/* Main Content */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="grid lg:grid-cols-2 gap-12">
-              {/* Left: Info */}
-              <div>
-                {/* Alert */}
-                <div className="bg-primary/10 border border-primary/30 rounded-xl p-4 mb-8 flex gap-3">
-                  <AlertCircle className="text-primary flex-shrink-0 mt-0.5" size={20} />
-                  <div>
-                    <p className="font-medium text-foreground text-sm">
-                      Reserva obrigatória nos fins de semana e feriados!
-                    </p>
-                    <p className="text-muted-foreground text-sm">
-                      De terça a sexta, aceitamos visitas sem reserva (sujeito à disponibilidade).
-                    </p>
-                  </div>
-                </div>
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Info + Social */}
+          <div className="space-y-6">
+            {/* Card Local */}
+            <div className="bg-white border-2 border-chest-blue/30 p-6 rounded-3xl shadow-sm">
+              <h3 className="font-display text-xl font-bold text-chest-dark mb-4 flex items-center gap-2">
+                <MapPin className="text-chest-blue" /> Onde estamos
+              </h3>
+              <p className="font-body text-gray-600 font-medium">Rua Galvão Bueno, 580 <br/> Liberdade, São Paulo - SP</p>
+            </div>
 
-                {/* Location Card */}
-                <div className="bg-card rounded-2xl p-6 shadow-card border border-border mb-6">
-                  <h3 className="font-display text-xl font-bold text-foreground mb-4 flex items-center gap-2">
-                    <MapPin className="text-gold" size={22} />
-                    Localização
-                  </h3>
-                  <p className="text-muted-foreground mb-4">
-                    <strong className="text-foreground">Rua Galvão Bueno, 580</strong><br />
-                    Liberdade, São Paulo - SP<br />
-                    CEP: 01506-000
-                  </p>
-                  <Button variant="elegant" className="w-full" asChild>
-                    <a 
-                      href="https://maps.google.com/?q=Rua+Galvao+Bueno+580+Liberdade+Sao+Paulo" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                    >
-                      <Navigation size={16} className="mr-2" />
-                      Abrir no Google Maps
-                    </a>
-                  </Button>
-                </div>
-
-                {/* Hours Card */}
-                <div className="bg-card rounded-2xl p-6 shadow-card border border-border mb-6">
-                  <h3 className="font-display text-xl font-bold text-foreground mb-4 flex items-center gap-2">
-                    <Clock className="text-gold" size={22} />
-                    Horário de Funcionamento
-                  </h3>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Segunda-feira</span>
-                      <span className="text-destructive font-medium">Fechado</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Terça a Domingo</span>
-                      <span className="text-foreground font-medium">11:00 - 18:30</span>
-                    </div>
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-4 italic">
-                    * Horários especiais em feriados e eventos. Consulte nossas redes sociais.
-                  </p>
-                </div>
-
-                {/* Contact Card */}
-                <div className="bg-card rounded-2xl p-6 shadow-card border border-border">
-                  <h3 className="font-display text-xl font-bold text-foreground mb-4 flex items-center gap-2">
-                    <Phone className="text-gold" size={22} />
-                    Contato Direto
-                  </h3>
-                  <div className="space-y-3">
-                    <a 
-                      href="https://instagram.com/chestofwonders"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      <Instagram size={20} />
-                      <span>@chestofwonders</span>
-                    </a>
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-4">
-                    Para reservas urgentes ou grupos grandes, entre em contato pelo Instagram.
-                  </p>
-                </div>
+            {/* Card Horário */}
+            <div className="bg-white border-2 border-chest-pink/30 p-6 rounded-3xl shadow-sm">
+              <h3 className="font-display text-xl font-bold text-chest-dark mb-4 flex items-center gap-2">
+                <Clock className="text-chest-pink" /> Horário
+              </h3>
+              <div className="font-body text-gray-600 font-medium space-y-2">
+                <p className="flex justify-between"><span>Terça a Domingo</span> <span className="font-bold text-chest-dark">11:00 - 18:30</span></p>
+                <p className="flex justify-between text-red-500 font-bold"><span>Segunda-feira</span> <span>FECHADO</span></p>
               </div>
+            </div>
 
-              {/* Right: Form */}
-              <div>
-                <div className="bg-card rounded-2xl p-6 md:p-8 shadow-card border border-border">
-                  <div className="flex items-center gap-2 mb-6">
-                    <Calendar className="text-gold" size={22} />
-                    <h3 className="font-display text-xl font-bold text-foreground">
-                      Solicitar Reserva
-                    </h3>
-                  </div>
-
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-1.5">
-                        Nome Completo *
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                        placeholder="Seu nome"
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-foreground mb-1.5">
-                          E-mail *
-                        </label>
-                        <input
-                          type="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          required
-                          className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                          placeholder="seu@email.com"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-foreground mb-1.5">
-                          Telefone *
-                        </label>
-                        <input
-                          type="tel"
-                          name="phone"
-                          value={formData.phone}
-                          onChange={handleChange}
-                          required
-                          className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                          placeholder="(11) 99999-9999"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-foreground mb-1.5">
-                          Data *
-                        </label>
-                        <input
-                          type="date"
-                          name="date"
-                          value={formData.date}
-                          onChange={handleChange}
-                          required
-                          className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-foreground mb-1.5">
-                          Horário *
-                        </label>
-                        <select
-                          name="time"
-                          value={formData.time}
-                          onChange={handleChange}
-                          required
-                          className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                        >
-                          <option value="">Selecione</option>
-                          <option value="11:00">11:00</option>
-                          <option value="12:00">12:00</option>
-                          <option value="13:00">13:00</option>
-                          <option value="14:00">14:00</option>
-                          <option value="15:00">15:00</option>
-                          <option value="16:00">16:00</option>
-                          <option value="17:00">17:00</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-foreground mb-1.5">
-                          Pessoas *
-                        </label>
-                        <select
-                          name="guests"
-                          value={formData.guests}
-                          onChange={handleChange}
-                          required
-                          className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                        >
-                          {[1,2,3,4,5,6,7,8].map(n => (
-                            <option key={n} value={n}>{n} {n === 1 ? 'pessoa' : 'pessoas'}</option>
-                          ))}
-                          <option value="9+">9+ pessoas</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-1.5">
-                        Observações
-                      </label>
-                      <textarea
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        rows={3}
-                        className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none"
-                        placeholder="Restrições alimentares, ocasião especial, etc."
-                      />
-                    </div>
-
-                    <Button 
-                      type="submit" 
-                      variant="mansion" 
-                      size="lg" 
-                      className="w-full"
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? (
-                        <>Enviando...</>
-                      ) : (
-                        <>
-                          <CheckCircle size={18} className="mr-2" />
-                          Solicitar Reserva
-                        </>
-                      )}
-                    </Button>
-
-                    <p className="text-xs text-muted-foreground text-center">
-                      Entraremos em contato para confirmar sua reserva em até 24 horas.
-                    </p>
-                  </form>
-                </div>
+            {/* Redes */}
+            <div className="bg-white border-2 border-chest-purple/30 p-6 rounded-3xl shadow-sm">
+              <h3 className="font-display text-xl font-bold text-chest-dark mb-4">Redes Sociais</h3>
+              <div className="grid grid-cols-2 gap-3">
+                <SocialButton href="https://instagram.com/chestmaids" icon={<Instagram />} label="Instagram" color="bg-chest-pink" />
+                <SocialButton href="https://tiktok.com/@chestmaids" icon={<TikTokIcon />} label="TikTok" color="bg-black" />
+                <SocialButton href="https://x.com/chestmaids" icon={<XIcon />} label="Twitter" color="bg-chest-dark" />
+                <SocialButton href="https://discord.com" icon={<DiscordIcon />} label="Discord" color="bg-[#5865F2]" />
               </div>
             </div>
           </div>
-        </section>
 
-        {/* Map Section */}
-        <section className="py-12 bg-lace">
-          <div className="container mx-auto px-4">
-            <div className="bg-card rounded-2xl overflow-hidden shadow-card border border-border">
-              <div className="aspect-video w-full bg-muted flex items-center justify-center">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.2394879888847!2d-46.63667!3d-23.5594!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59b0f0f0f0f0%3A0x0!2sRua%20Galv%C3%A3o%20Bueno%2C%20580%20-%20Liberdade%2C%20S%C3%A3o%20Paulo!5e0!3m2!1spt-BR!2sbr!4v1234567890"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Localização do Chest of Wonders"
-                  className="w-full h-full min-h-[400px]"
+          {/* Form */}
+          <div className="bg-white border-2 border-chest-dark rounded-3xl p-8 shadow-pop relative">
+            <div className="absolute -top-4 -right-4 w-20 h-20 bg-chest-purple rounded-full blur-2xl -z-10" />
+            
+            <h3 className="font-display text-2xl font-bold text-chest-dark mb-6 flex items-center gap-2">
+              <Mail className="text-chest-purple" /> Envie uma Mensagem
+            </h3>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <label className="font-display font-bold text-chest-dark ml-1">Nome</label>
+                <input 
+                  name="name" 
+                  value={formData.name} 
+                  onChange={handleChange} 
+                  className="w-full p-3 rounded-xl border-2 border-chest-purple/20 focus:border-chest-purple focus:ring-4 focus:ring-chest-purple/10 outline-none transition-all font-body font-medium bg-gray-50" 
+                  placeholder="Seu nome..." 
+                  required 
                 />
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Tips */}
-        <section className="py-12">
-          <div className="container mx-auto px-4">
-            <div className="max-w-2xl mx-auto">
-              <h3 className="font-display text-xl font-bold text-foreground mb-6 text-center">
-                Dicas para sua Visita
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="bg-card rounded-xl p-4 border border-border">
-                  <span className="text-2xl mb-2 block">🚇</span>
-                  <h4 className="font-medium text-foreground text-sm mb-1">Como Chegar</h4>
-                  <p className="text-xs text-muted-foreground">
-                    Estação Japão-Liberdade (Linha Azul). 5 minutos a pé pela Rua Galvão Bueno.
-                  </p>
-                </div>
-                <div className="bg-card rounded-xl p-4 border border-border">
-                  <span className="text-2xl mb-2 block">⏰</span>
-                  <h4 className="font-medium text-foreground text-sm mb-1">Melhor Horário</h4>
-                  <p className="text-xs text-muted-foreground">
-                    Dias de semana são mais tranquilos. Fins de semana lotam rápido!
-                  </p>
-                </div>
-                <div className="bg-card rounded-xl p-4 border border-border">
-                  <span className="text-2xl mb-2 block">💳</span>
-                  <h4 className="font-medium text-foreground text-sm mb-1">Pagamento</h4>
-                  <p className="text-xs text-muted-foreground">
-                    Aceitamos cartões de crédito/débito e PIX.
-                  </p>
-                </div>
-                <div className="bg-card rounded-xl p-4 border border-border">
-                  <span className="text-2xl mb-2 block">📸</span>
-                  <h4 className="font-medium text-foreground text-sm mb-1">Fotos</h4>
-                  <p className="text-xs text-muted-foreground">
-                    Fotos do ambiente são permitidas. Maids requerem autorização.
-                  </p>
-                </div>
+              <div className="space-y-2">
+                <label className="font-display font-bold text-chest-dark ml-1">E-mail</label>
+                <input 
+                  name="email" 
+                  type="email"
+                  value={formData.email} 
+                  onChange={handleChange} 
+                  className="w-full p-3 rounded-xl border-2 border-chest-purple/20 focus:border-chest-purple focus:ring-4 focus:ring-chest-purple/10 outline-none transition-all font-body font-medium bg-gray-50" 
+                  placeholder="seu@email.com" 
+                  required 
+                />
               </div>
-            </div>
+              <div className="space-y-2">
+                <label className="font-display font-bold text-chest-dark ml-1">Assunto</label>
+                <input 
+                  name="subject" 
+                  value={formData.subject} 
+                  onChange={handleChange} 
+                  className="w-full p-3 rounded-xl border-2 border-chest-purple/20 focus:border-chest-purple focus:ring-4 focus:ring-chest-purple/10 outline-none transition-all font-body font-medium bg-gray-50" 
+                  placeholder="Sobre o que quer falar?" 
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="font-display font-bold text-chest-dark ml-1">Mensagem</label>
+                <textarea 
+                  name="message" 
+                  value={formData.message} 
+                  onChange={handleChange} 
+                  rows={4}
+                  className="w-full p-3 rounded-xl border-2 border-chest-purple/20 focus:border-chest-purple focus:ring-4 focus:ring-chest-purple/10 outline-none transition-all font-body font-medium bg-gray-50 resize-none" 
+                  placeholder="Escreva sua mensagem com carinho..." 
+                  required 
+                />
+              </div>
+
+              <Button type="submit" size="lg" className="w-full bg-chest-pink hover:bg-chest-pink/90 text-chest-dark font-display font-bold text-lg rounded-xl shadow-pop-sm hover:translate-y-[-2px] hover:shadow-pop transition-all border-2 border-chest-dark" disabled={isSubmitting}>
+                {isSubmitting ? "Enviando..." : "Enviar Mensagem 💖"}
+              </Button>
+            </form>
           </div>
-        </section>
+        </div>
       </main>
       <Footer />
     </div>
   );
 };
+
+const SocialButton = ({ href, icon, label, color }: any) => (
+  <a href={href} target="_blank" rel="noopener noreferrer" className={cn("flex items-center gap-2 p-3 rounded-xl text-white font-bold text-sm shadow-sm hover:scale-105 transition-transform", color)}>
+    <div className="w-5 h-5">{icon}</div> {label}
+  </a>
+)
 
 export default ContatoPage;

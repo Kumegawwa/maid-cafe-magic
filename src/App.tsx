@@ -4,11 +4,12 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
-import ExperienciaPage from "./pages/ExperienciaPage";
-import CardapioPage from "./pages/CardapioPage";
 import MaidsPage from "./pages/MaidsPage";
-import EventosPage from "./pages/EventosPage";
 import ContatoPage from "./pages/ContatoPage";
+import CardapioPage from "./pages/CardapioPage";
+import RegrasPage from "./pages/RegrasPage"; // Importação nova
+import EventosPage from "./pages/EventosPage";
+import ExperienciaPage from "./pages/ExperienciaPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,12 +22,12 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/experiencia" element={<ExperienciaPage />} />
-          <Route path="/cardapio" element={<CardapioPage />} />
           <Route path="/maids" element={<MaidsPage />} />
-          <Route path="/eventos" element={<EventosPage />} />
           <Route path="/contato" element={<ContatoPage />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/cardapio" element={<CardapioPage />} />
+          <Route path="/regras" element={<RegrasPage />} /> {/* Rota nova */}
+          <Route path="/eventos" element={<EventosPage />} />
+          <Route path="/experiencia" element={<ExperienciaPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

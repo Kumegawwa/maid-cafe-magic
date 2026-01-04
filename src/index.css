@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Fredoka:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,115 +6,43 @@
 
 @layer base {
   :root {
-    /* Mansion Cream & Warmth */
-    --background: 40 30% 96%;
-    --foreground: 25 35% 20%;
+    /* Base Background - Branco Limpo */
+    --background: 0 0% 100%;
+    /* Texto Principal - Pantone 426 C (#272727) */
+    --foreground: 0 0% 15%; 
 
-    /* Warm Card Surfaces */
-    --card: 40 25% 98%;
-    --card-foreground: 25 35% 20%;
+    /* Card Background - Branco */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 15%;
 
-    --popover: 40 25% 98%;
-    --popover-foreground: 25 35% 20%;
+    /* Popover - Branco */
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 15%;
 
-    /* Dusty Pink - Primary */
-    --primary: 350 40% 65%;
-    --primary-foreground: 40 30% 98%;
+    /* Primary - Pantone 230 C (#ffa8da) - Rosa */
+    --primary: 325 100% 83%;
+    --primary-foreground: 0 0% 15%; /* Texto escuro no rosa para contraste */
 
-    /* Chocolate Brown - Secondary */
-    --secondary: 25 35% 30%;
-    --secondary-foreground: 40 30% 96%;
+    /* Secondary - Pantone 630 C (#73c5dd) - Azul */
+    --secondary: 193 60% 66%;
+    --secondary-foreground: 0 0% 15%;
 
-    /* Soft Pink Muted */
-    --muted: 350 25% 92%;
-    --muted-foreground: 25 20% 45%;
+    /* Muted - Pantone 264 C (#bcadf0) - Roxo (usado como tom suave) */
+    --muted: 253 65% 81%;
+    --muted-foreground: 253 40% 40%;
 
-    /* Antique Gold - Accent */
-    --accent: 43 60% 55%;
-    --accent-foreground: 25 35% 15%;
+    /* Accent - Roxo ou Azul suave */
+    --accent: 193 60% 90%;
+    --accent-foreground: 0 0% 15%;
 
-    --destructive: 0 65% 55%;
-    --destructive-foreground: 40 30% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
 
-    /* Victorian Borders */
-    --border: 25 20% 85%;
-    --input: 25 20% 88%;
-    --ring: 350 40% 65%;
+    --border: 253 65% 90%; /* Bordas roxinhas claras */
+    --input: 253 65% 90%;
+    --ring: 325 100% 83%; /* Anel de foco Rosa */
 
-    --radius: 0.75rem;
-
-    /* Custom Mansion Colors */
-    --cream: 40 30% 96%;
-    --dusty-rose: 350 40% 70%;
-    --dusty-rose-light: 350 35% 85%;
-    --chocolate: 25 35% 25%;
-    --chocolate-light: 25 30% 40%;
-    --gold: 43 60% 55%;
-    --gold-light: 43 50% 75%;
-    --lace: 40 20% 92%;
-    --parchment: 38 35% 90%;
-
-    /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(350 40% 70% / 0.15), hsl(43 60% 55% / 0.1));
-    --gradient-card: linear-gradient(180deg, hsl(40 25% 98%), hsl(40 30% 95%));
-    --gradient-gold: linear-gradient(135deg, hsl(43 60% 55%), hsl(43 50% 45%));
-    --gradient-pink: linear-gradient(135deg, hsl(350 40% 70%), hsl(350 35% 60%));
-
-    /* Shadows */
-    --shadow-soft: 0 4px 20px hsl(25 35% 25% / 0.08);
-    --shadow-card: 0 8px 30px hsl(25 35% 25% / 0.1);
-    --shadow-elevated: 0 12px 40px hsl(25 35% 25% / 0.15);
-    --shadow-gold: 0 4px 20px hsl(43 60% 55% / 0.3);
-
-    /* Sidebar */
-    --sidebar-background: 40 30% 96%;
-    --sidebar-foreground: 25 35% 20%;
-    --sidebar-primary: 350 40% 65%;
-    --sidebar-primary-foreground: 40 30% 98%;
-    --sidebar-accent: 43 60% 55%;
-    --sidebar-accent-foreground: 25 35% 15%;
-    --sidebar-border: 25 20% 85%;
-    --sidebar-ring: 350 40% 65%;
-  }
-
-  .dark {
-    --background: 25 30% 8%;
-    --foreground: 40 25% 92%;
-
-    --card: 25 28% 12%;
-    --card-foreground: 40 25% 92%;
-
-    --popover: 25 28% 12%;
-    --popover-foreground: 40 25% 92%;
-
-    --primary: 350 45% 60%;
-    --primary-foreground: 25 30% 8%;
-
-    --secondary: 25 25% 22%;
-    --secondary-foreground: 40 25% 92%;
-
-    --muted: 25 20% 18%;
-    --muted-foreground: 40 15% 60%;
-
-    --accent: 43 55% 50%;
-    --accent-foreground: 25 30% 8%;
-
-    --destructive: 0 60% 45%;
-    --destructive-foreground: 40 25% 92%;
-
-    --border: 25 20% 20%;
-    --input: 25 20% 18%;
-    --ring: 350 45% 60%;
-
-    --cream: 25 30% 10%;
-    --dusty-rose: 350 45% 55%;
-    --dusty-rose-light: 350 30% 25%;
-    --chocolate: 25 25% 60%;
-    --chocolate-light: 25 20% 45%;
-    --gold: 43 55% 50%;
-    --gold-light: 43 40% 35%;
-    --lace: 25 15% 15%;
-    --parchment: 25 20% 12%;
+    --radius: 1.5rem; /* Bordas bem arredondadas (24px) */
   }
 }
 
@@ -122,167 +50,34 @@
   * {
     @apply border-border;
   }
-
   body {
-    @apply bg-background text-foreground font-body antialiased;
+    @apply bg-background text-foreground font-body;
   }
-
+  /* Títulos com a fonte Fredoka */
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
   }
 }
 
-@layer components {
-  /* Victorian Decorative Elements */
-  .victorian-border {
-    @apply relative;
-    border: 2px solid hsl(var(--gold) / 0.4);
-    background: linear-gradient(hsl(var(--card)), hsl(var(--card))) padding-box,
-                linear-gradient(135deg, hsl(var(--gold)), hsl(var(--dusty-rose)), hsl(var(--gold))) border-box;
-    border-radius: var(--radius);
-  }
-
-  .lace-pattern {
-    background-image: 
-      radial-gradient(circle at 50% 0%, hsl(var(--dusty-rose) / 0.1) 25%, transparent 25%),
-      radial-gradient(circle at 0% 50%, hsl(var(--dusty-rose) / 0.1) 25%, transparent 25%),
-      radial-gradient(circle at 100% 50%, hsl(var(--dusty-rose) / 0.1) 25%, transparent 25%),
-      radial-gradient(circle at 50% 100%, hsl(var(--dusty-rose) / 0.1) 25%, transparent 25%);
-    background-size: 20px 20px;
-  }
-
-  .parchment-texture {
-    background-color: hsl(var(--parchment));
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
-  }
-
-  /* Ribbon Banner */
-  .ribbon {
-    @apply relative inline-block px-8 py-2;
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--dusty-rose)));
-    clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
-  }
-
-  /* Magical Glow Effects */
-  .glow-gold {
-    box-shadow: 0 0 20px hsl(var(--gold) / 0.4), 0 0 40px hsl(var(--gold) / 0.2);
-  }
-
-  .glow-pink {
-    box-shadow: 0 0 20px hsl(var(--primary) / 0.4), 0 0 40px hsl(var(--primary) / 0.2);
-  }
-
-  /* Ornamental Divider */
-  .ornament-divider {
-    @apply relative flex items-center justify-center my-8;
-  }
-
-  .ornament-divider::before,
-  .ornament-divider::after {
-    content: '';
-    @apply flex-1 h-px;
-    background: linear-gradient(90deg, transparent, hsl(var(--gold) / 0.5), transparent);
-  }
-
-  .ornament-divider::before {
-    margin-right: 1rem;
-  }
-
-  .ornament-divider::after {
-    margin-left: 1rem;
-  }
-
-  /* Floating Animation */
-  .float-gentle {
-    animation: floatGentle 6s ease-in-out infinite;
-  }
-
-  @keyframes floatGentle {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-  }
-
-  /* Sparkle Effect */
-  .sparkle {
-    @apply relative;
-  }
-
-  .sparkle::after {
-    content: '✧';
-    @apply absolute -top-2 -right-2 text-accent animate-pulse;
-    font-size: 0.75rem;
-  }
-
-  /* Menu Card Hover */
-  .menu-card {
-    @apply transition-all duration-300;
-  }
-
-  .menu-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-elevated);
-  }
-
-  /* Status Badge */
-  .status-open {
-    @apply bg-green-500/20 text-green-700 border-green-500/30;
-  }
-
-  .status-closed {
-    @apply bg-red-500/20 text-red-700 border-red-500/30;
-  }
-}
-
+/* Utilitários de Animação e Estilo Pop */
 @layer utilities {
-  /* Scrollbar Styling */
-  .scrollbar-mansion {
-    scrollbar-width: thin;
-    scrollbar-color: hsl(var(--primary) / 0.3) transparent;
+  .shadow-pop {
+    box-shadow: 4px 4px 0px 0px rgba(39, 39, 39, 0.1);
+  }
+  .shadow-pop-hover {
+    box-shadow: 6px 6px 0px 0px rgba(39, 39, 39, 0.2);
+  }
+  .text-shadow-sm {
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+  }
+  
+  /* Gradientes Específicos do Redesign */
+  .bg-gradient-pop {
+    background: linear-gradient(135deg, #ffa8da 0%, #bcadf0 100%);
   }
 
-  .scrollbar-mansion::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  .scrollbar-mansion::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .scrollbar-mansion::-webkit-scrollbar-thumb {
-    background: hsl(var(--primary) / 0.3);
-    border-radius: 4px;
-  }
-
-  .scrollbar-mansion::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--primary) / 0.5);
-  }
-
-  /* Text Gradients */
-  .text-gradient-gold {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--gold)), hsl(43 50% 45%));
-  }
-
-  .text-gradient-pink {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(350 35% 55%));
-  }
-
-  /* Decorative Corners */
-  .corner-flourish {
-    @apply relative;
-  }
-
-  .corner-flourish::before {
-    content: '❧';
-    @apply absolute -top-3 -left-3 text-gold opacity-60;
-    font-size: 1.5rem;
-  }
-
-  .corner-flourish::after {
-    content: '❧';
-    @apply absolute -bottom-3 -right-3 text-gold opacity-60;
-    font-size: 1.5rem;
-    transform: rotate(180deg);
-  }
+  .perspective-1000 { perspective: 1000px; }
+  .transform-style-3d { transform-style: preserve-3d; }
+  .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  .rotate-y-180 { transform: rotateY(180deg); }
 }

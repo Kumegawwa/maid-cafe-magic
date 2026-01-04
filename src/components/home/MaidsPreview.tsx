@@ -1,131 +1,81 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Heart, Sparkles, Star } from 'lucide-react';
+import { ArrowRight, Zap, Heart, Sparkles } from 'lucide-react';
 
 const MaidsPreview = () => {
-  const maids = [
-    {
-      name: 'Maid Lillian',
-      personality: 'Deredere',
-      specialty: 'Latte Art',
-      quote: '"Seu sorriso é minha maior recompensa, Mestre!"',
-      color: 'from-pink-300 to-pink-500',
+  // Destaque de 3 tipos para a Home (Isca para a página completa)
+  const previewTypes = [
+    { 
+      name: "Tsundere", 
+      desc: "N-não é como se eu gostasse de você ou algo assim! Baka!",
+      color: "bg-orange-50", 
+      border: "border-orange-200", 
+      text: "text-orange-500",
+      icon: Zap 
     },
-    {
-      name: 'Maid Miko',
-      personality: 'Kuudere',
-      specialty: 'Chás Especiais',
-      quote: '"...ficou delicioso. Para você."',
-      color: 'from-purple-300 to-purple-500',
+    { 
+      name: "Mahou", 
+      desc: "Vou lançar um feitiço para deixar sua comida deliciosa! Moe moe kyun!",
+      color: "bg-purple-50", 
+      border: "border-purple-200", 
+      text: "text-purple-500",
+      icon: Sparkles
     },
-    {
-      name: 'Maid Ellie',
-      personality: 'Genki',
-      specialty: 'Sobremesas',
-      quote: '"Vamos fazer magia juntos hoje!"',
-      color: 'from-amber-300 to-amber-500',
+    { 
+      name: "Deredere", 
+      desc: "Cheia de energia e amor para dar! Bem-vindo de volta, Mestre!",
+      color: "bg-pink-50", 
+      border: "border-pink-200", 
+      text: "text-pink-500",
+      icon: Heart
     },
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-lace to-background">
+    <section className="py-24 bg-chest-blue/5">
       <div className="container mx-auto px-4">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <span className="text-gold text-2xl mb-4 block">🎀</span>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Habitantes da <span className="text-gradient-pink">Mansão</span>
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Nossas Maids e Mordomos estão prontos para tornar sua visita inesquecível. 
-            Cada um com sua personalidade única e talentos especiais.
-          </p>
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 text-center md:text-left">
+          <div className="max-w-2xl">
+            <span className="text-chest-blue font-display font-bold tracking-wider uppercase text-sm mb-3 block">
+              Nossa Equipe
+            </span>
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black text-chest-dark leading-tight">
+              Conheça as <span className="text-chest-blue">Maids & Butlers</span>
+            </h2>
+            <p className="mt-6 text-gray-600 font-body text-xl font-medium leading-relaxed">
+              Cada habitante da mansão tem uma personalidade única. 
+              Quem irá atender você hoje? Escolha seu "Dere Type"!
+            </p>
+          </div>
+          
+          <Button variant="link" className="text-chest-dark font-display font-bold text-xl hover:text-chest-blue transition-colors group p-0 h-auto" asChild>
+            <Link to="/maids" className="flex items-center gap-2">
+              Ver todas as Personalidades <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
+            </Link>
+          </Button>
         </div>
 
-        {/* Maids Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          {maids.map((maid, index) => (
-            <div
-              key={index}
-              className="group relative bg-card rounded-3xl overflow-hidden shadow-card hover:shadow-elevated transition-all duration-300"
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {previewTypes.map((type, idx) => (
+            <div 
+              key={idx} 
+              className={`group relative bg-white rounded-[2.5rem] p-8 border-4 ${type.border} shadow-pop hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-300 flex flex-col items-center text-center`}
             >
-              {/* Avatar Placeholder */}
-              <div className={`h-48 bg-gradient-to-br ${maid.color} flex items-center justify-center`}>
-                <span className="text-7xl">👩‍🍳</span>
+              <div className={`w-24 h-24 rounded-3xl ${type.color} flex items-center justify-center mb-6 border-2 ${type.border} shadow-sm group-hover:scale-110 transition-transform`}>
+                <type.icon className={`w-12 h-12 ${type.text}`} />
               </div>
               
-              {/* Content */}
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-display text-xl font-semibold text-foreground">
-                    {maid.name}
-                  </h3>
-                  <Badge variant="pink" className="text-xs">
-                    {maid.personality}
-                  </Badge>
-                </div>
-                
-                {/* Stats */}
-                <div className="flex items-center gap-4 mb-4 text-sm">
-                  <div className="flex items-center gap-1 text-muted-foreground">
-                    <Sparkles size={14} className="text-gold" />
-                    <span>{maid.specialty}</span>
-                  </div>
-                </div>
-                
-                {/* Quote */}
-                <p className="text-muted-foreground text-sm italic border-l-2 border-primary/30 pl-3">
-                  {maid.quote}
+              <h3 className="font-display text-3xl font-black text-chest-dark mb-4">{type.name}</h3>
+              
+              <div className="relative">
+                <span className="absolute -top-4 -left-2 text-6xl font-display text-chest-dark/5">"</span>
+                <p className="font-body text-gray-600 font-medium italic text-lg px-2 leading-relaxed relative z-10">
+                  {type.desc}
                 </p>
-
-                {/* Status */}
-                <div className="mt-4 pt-4 border-t border-border flex items-center justify-between">
-                  <div className="flex items-center gap-1 text-xs text-green-600">
-                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                    Na Mansão
-                  </div>
-                  <Heart size={16} className="text-primary opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all" />
-                </div>
+                <span className="absolute -bottom-8 -right-2 text-6xl font-display text-chest-dark/5">"</span>
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Personality Guide */}
-        <div className="bg-card rounded-2xl p-6 md:p-8 border border-border max-w-3xl mx-auto mb-12">
-          <h3 className="font-display text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-            <Star size={18} className="text-gold" />
-            Guia de Personalidades
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-            <div>
-              <strong className="text-primary">Deredere:</strong>
-              <span className="text-muted-foreground ml-1">Doce e carinhosa, sempre sorridente</span>
-            </div>
-            <div>
-              <strong className="text-primary">Tsundere:</strong>
-              <span className="text-muted-foreground ml-1">Fria por fora, gentil por dentro</span>
-            </div>
-            <div>
-              <strong className="text-primary">Kuudere:</strong>
-              <span className="text-muted-foreground ml-1">Calma e misteriosa, de poucas palavras</span>
-            </div>
-            <div>
-              <strong className="text-primary">Genki:</strong>
-              <span className="text-muted-foreground ml-1">Energética e animada, sempre positiva</span>
-            </div>
-          </div>
-        </div>
-
-        {/* CTA */}
-        <div className="text-center">
-          <Button variant="elegant" size="lg" asChild>
-            <Link to="/maids">
-              Conhecer Todas as Maids
-              <span className="ml-2">→</span>
-            </Link>
-          </Button>
         </div>
       </div>
     </section>

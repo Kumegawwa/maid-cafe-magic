@@ -2,7 +2,12 @@ import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -13,10 +18,6 @@ export default {
       },
     },
     extend: {
-      fontFamily: {
-        display: ['Playfair Display', 'serif'],
-        body: ['Nunito', 'sans-serif'],
-      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -51,31 +52,33 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
-        },
-        // Mansion Custom Colors
-        cream: "hsl(var(--cream))",
-        "dusty-rose": "hsl(var(--dusty-rose))",
-        "dusty-rose-light": "hsl(var(--dusty-rose-light))",
-        chocolate: "hsl(var(--chocolate))",
-        "chocolate-light": "hsl(var(--chocolate-light))",
-        gold: "hsl(var(--gold))",
-        "gold-light": "hsl(var(--gold-light))",
-        lace: "hsl(var(--lace))",
-        parchment: "hsl(var(--parchment))",
+        // CORES DO REDESIGN (PANTONE)
+        chest: {
+          pink: "#ffa8da", // Pantone 230 C
+          blue: "#73c5dd", // Pantone 630 C
+          purple: "#bcadf0", // Pantone 264 C
+          dark: "#272727", // Pantone 426 C
+        }
+      },
+      fontFamily: {
+        display: ["Fredoka", "cursive"], // Fonte de Títulos (Redesign)
+        body: ["Baloo 2", "sans-serif"], // Fonte de Texto (Redesign)
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      boxShadow: {
+        'pop': '4px 4px 0px 0px rgba(39, 39, 39, 1)', // Sombra dura estilo Sticker
+        'pop-sm': '2px 2px 0px 0px rgba(39, 39, 39, 1)',
+        'pop-colored': '4px 4px 0px 0px #bcadf0',
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+        "float": "float 6s ease-in-out infinite",
+        "wiggle": "wiggle 1s ease-in-out infinite",
       },
       keyframes: {
         "accordion-down": {
@@ -86,57 +89,14 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "fade-in": {
-          "0%": { opacity: "0", transform: "translateY(10px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
-        "fade-in-up": {
-          "0%": { opacity: "0", transform: "translateY(20px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
-        "scale-in": {
-          "0%": { opacity: "0", transform: "scale(0.95)" },
-          "100%": { opacity: "1", transform: "scale(1)" },
-        },
-        "float": {
+        float: {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
         },
-        "shimmer": {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
-        },
-        "sparkle": {
-          "0%, 100%": { opacity: "1", transform: "scale(1)" },
-          "50%": { opacity: "0.5", transform: "scale(0.8)" },
-        },
-        "ribbon-wave": {
-          "0%, 100%": { transform: "rotate(-2deg)" },
-          "50%": { transform: "rotate(2deg)" },
-        },
-      },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in": "fade-in 0.5s ease-out",
-        "fade-in-up": "fade-in-up 0.6s ease-out",
-        "scale-in": "scale-in 0.3s ease-out",
-        "float": "float 6s ease-in-out infinite",
-        "shimmer": "shimmer 2s linear infinite",
-        "sparkle": "sparkle 2s ease-in-out infinite",
-        "ribbon-wave": "ribbon-wave 3s ease-in-out infinite",
-      },
-      backgroundImage: {
-        "gradient-hero": "var(--gradient-hero)",
-        "gradient-card": "var(--gradient-card)",
-        "gradient-gold": "var(--gradient-gold)",
-        "gradient-pink": "var(--gradient-pink)",
-      },
-      boxShadow: {
-        "soft": "var(--shadow-soft)",
-        "card": "var(--shadow-card)",
-        "elevated": "var(--shadow-elevated)",
-        "gold": "var(--shadow-gold)",
+        wiggle: {
+          "0%, 100%": { transform: "rotate(-3deg)" },
+          "50%": { transform: "rotate(3deg)" },
+        }
       },
     },
   },
