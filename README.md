@@ -1,73 +1,101 @@
-# Welcome to your Lovable project
+# 🧁 Chest of Wonders - Maid Café Web Experience
 
-## Project info
+![Project Status](https://img.shields.io/badge/Status-Concluído-success)
+![Version](https://img.shields.io/badge/Version-2.0.0-blue)
+![Style](https://img.shields.io/badge/Style-Pop%20%26%20Kawaii-pink)
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+> **O portal digital para o primeiro Maid Café de imersão em fantasia do Brasil.**
 
-## How can I edit this code?
+Este projeto é uma Single Page Application (SPA) moderna, desenvolvida com **React** e **TypeScript**, projetada para oferecer uma experiência de usuário imersiva, divertida e informativa ("Moe Moe Kyun!"). O site reflete a identidade visual **Pop & Kawaii** da marca, utilizando uma paleta de cores Pantone vibrante e tipografia arredondada.
 
-There are several ways of editing your application.
+---
 
-**Use Lovable**
+## ✨ Funcionalidades Principais
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+O site foi arquitetado para guiar o cliente desde a descoberta até a reserva, com interações ricas e animações fluidas.
 
-Changes made via Lovable will be committed automatically to this repo.
+### 🏠 **Home (A Experiência)**
+- **Hero Section Imersiva:** Apresentação impactante com elementos flutuantes animados e gradientes suaves.
+- **Instagram Feed Infinito:** Carrossel automático (*marquee*) exibindo momentos mágicos do café em loop contínuo.
+- **Navegação Intuitiva:** Menu responsivo com indicação visual de status (Aberto/Fechado) baseado no horário real do sistema.
 
-**Use your preferred IDE**
+### 📜 **Menu Mágico Interativo**
+- **Sistema de Filtragem:** Filtros dinâmicos por categoria (Frapês, Quentes, Salgados, etc.) e restrições alimentares (Vegano, Sem Glúten, Zero Lactose).
+- **Cards Detalhados:** Exibição de itens com emojis temáticos, preços destacados e etiquetas de dieta.
+- **PDF Download:** Botão estilizado e animado para acesso ao cardápio ilustrado original.
+- **Sticky Navigation:** Barra de categorias que se fixa ao topo para facilitar a navegação em cardápios longos.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### 🎀 **Maids & Personalidades (Interativo)**
+- **Flip Cards 3D:** Uma experiência gamificada onde o usuário clica nos cartões das personalidades ("Dere Types") para ver:
+  - **Frente:** Descrição da personalidade.
+  - **Verso (Giro 180º):** Exemplo de atuação/diálogo e ícones temáticos.
+- **Catálogo Completo:** Apresentação dos 12 arquétipos (Tsundere, Deredere, Kamidere, etc.) com cores e ícones únicos para cada um.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### ℹ️ **Informações e Institucional**
+- **Regras da Casa:** Guia visual de conduta utilizando ícones claros para permissões (Fotos, Interação) e proibições.
+- **Eventos:** Vitrine para aniversários, dias temáticos e pocket shows.
+- **A Experiência:** Explicação didática sobre o conceito de Maid Café e rituais ("Oishikunare").
+- **Contato:** Formulário estilizado, mapa de localização e links diretos para reservas externas (DGuests).
 
-Follow these steps:
+---
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 🎨 Identidade Visual (Design System)
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+O projeto segue um rigoroso sistema de design definido no `tailwind.config.ts`:
 
-# Step 3: Install the necessary dependencies.
-npm i
+* **Paleta de Cores (Pantone):**
+    * 🌸 `chest-pink` (#ffa8da)
+    * 🥣 `chest-blue` (#73c5dd)
+    * 🔮 `chest-purple` (#bcadf0)
+    * ⚫ `chest-dark` (#272727)
+* **Tipografia:**
+    * Títulos: *Fredoka* (Arredondada e divertida).
+    * Corpo: *Baloo 2* (Leitura confortável e moderna).
+* **Estética:**
+    * **Bordas:** Super arredondadas (`rounded-[2rem]`).
+    * **Sombras:** Sombras duras e sólidas ("Pop Shadow") para efeito 2D/Sticker.
+    * **Animações:** `float` (flutuar), `wiggle` (balançar), `spin-slow` e transições suaves de hover.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+---
 
-**Edit a file directly in GitHub**
+## 🛠️ Tecnologias Utilizadas
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Este projeto utiliza as ferramentas mais modernas do ecossistema React:
 
-**Use GitHub Codespaces**
+* **Core:** [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) + [Vite](https://vitejs.dev/)
+* **Estilização:** [Tailwind CSS](https://tailwindcss.com/) + [Tailwind Animate](https://github.com/jamiebuilds/tailwindcss-animate)
+* **Componentes UI:** [Shadcn/ui](https://ui.shadcn.com/) (Baseado em Radix UI)
+* **Ícones:** [Lucide React](https://lucide.dev/)
+* **Roteamento:** [React Router DOM](https://reactrouter.com/)
+* **Gerenciamento de Estado/Cache:** [TanStack Query](https://tanstack.com/query/latest)
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+---
 
-## What technologies are used for this project?
+## 🚀 Como Rodar o Projeto
 
-This project is built with:
+Pré-requisitos: Certifique-se de ter o **Node.js** instalado em sua máquina.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+1.  **Clone o repositório:**
+    ```bash
+    git clone [https://github.com/seu-usuario/maid-cafe-magic.git](https://github.com/seu-usuario/maid-cafe-magic.git)
+    cd maid-cafe-magic
+    ```
 
-## How can I deploy this project?
+2.  **Instale as dependências:**
+    ```bash
+    npm install
+    # ou
+    yarn install
+    ```
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+3.  **Inicie o servidor de desenvolvimento:**
+    ```bash
+    npm run dev
+    ```
 
-## Can I connect a custom domain to my Lovable project?
+4.  **Acesse:**
+    O projeto estará rodando em `http://localhost:5173` (ou a porta indicada no terminal).
 
-Yes, you can!
+---
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## 📂 Estrutura de Pastas
