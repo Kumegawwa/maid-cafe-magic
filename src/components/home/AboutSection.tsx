@@ -20,7 +20,7 @@ const AboutSection = () => {
                  src="/sobre-nos.jpg" 
                  alt="Interior do Chest of Wonders" 
                  className="w-full h-full object-cover"
-                 onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
                />
             </div>
             {/* Elemento Decorativo Atrás (Sombra sólida rosa) */}
