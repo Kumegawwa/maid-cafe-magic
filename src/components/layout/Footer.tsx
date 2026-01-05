@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Separator } from '@/components/ui/separator';
 import { Mail, MapPin, Clock, Instagram, Facebook } from 'lucide-react';
-import { cn } from '@/lib/utils'; // <--- ESTA LINHA ESTAVA FALTANDO
+import { cn } from '@/lib/utils';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -51,9 +51,10 @@ const Footer = () => {
                   <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
                 </svg>
               </SocialLink>
-              <SocialLink href="https://discord.com" color="bg-[#5865F2]" label="Discord">
-                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-[18px] h-[18px]">
-                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037 13.48 13.48 0 0 0-.59 1.227 18.3 18.3 0 0 0-7.163 0 13.48 13.48 0 0 0-.59-1.227.074.074 0 0 0-.079-.037A19.736 19.736 0 0 0 2.063 4.37c-.01 0-.019.01-.027.02C.1 7.35.35 10.286 1.135 13.138a.08.08 0 0 0 .034.053 19.898 19.898 0 0 0 5.996 3.027.077.077 0 0 0 .084-.027 14.16 14.16 0 0 0 1.225-1.993.076.076 0 0 0-.041-.106 9.13 9.13 0 0 1-2.906-1.393.076.076 0 0 1 .015-.127c.23-.173.456-.356.67-.547a.077.077 0 0 1 .082-.012 13.018 13.018 0 0 0 10.748 0 .077.077 0 0 1 .082.012c.214.191.44.374.67.547a.076.076 0 0 1 .015.127 9.08 9.08 0 0 1-2.906 1.393.076.076 0 0 0-.041.106 14.16 14.16 0 0 0 1.225 1.993.076.076 0 0 0 .084.027 19.91 19.91 0 0 0 6.002-3.027.077.077 0 0 0 .033-.052c.767-2.825 1.01-5.733-.896-8.723a.075.075 0 0 0-.026-.02z"/>
+              <SocialLink href="https://discord.com/invite/e7saq4Gt8N" color="bg-[#5865F2]" label="Discord">
+                 {/* SVG CORRIGIDO DO DISCORD */}
+                 <svg viewBox="0 0 127.14 96.36" fill="currentColor" className="w-[20px] h-[16px] mt-[2px]">
+                  <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.11,77.11,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22c.63-15.79-4.16-32.29-18.9-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
                 </svg>
               </SocialLink>
             </div>
@@ -112,7 +113,7 @@ const SocialLink = ({ href, label, children, color }: { href: string; label: str
     rel="noopener noreferrer" 
     aria-label={label}
     className={cn(
-      "p-2.5 rounded-full text-white transition-all duration-300 hover:scale-110 shadow-sm hover:shadow-pop",
+      "p-2.5 rounded-full text-white transition-all duration-300 hover:scale-110 shadow-sm hover:shadow-pop flex items-center justify-center", // Adicionado flex center
       color
     )}
   >
