@@ -12,15 +12,20 @@ const AboutSection = () => {
           <div className="flex-1 relative w-full max-w-lg mx-auto lg:max-w-none">
             {/* Moldura Pop */}
             <div className="aspect-square relative z-10 bg-chest-blue/10 rounded-[3rem] border-4 border-chest-blue overflow-hidden shadow-pop transform rotate-[-2deg] hover:rotate-0 transition-transform duration-500">
-               {/* Placeholder para imagem real */}
+               {/* Placeholder (Fica atrás da imagem) */}
                <div className="absolute inset-0 flex items-center justify-center text-chest-blue/30 bg-white">
                  <Sparkles size={120} />
                </div>
+               
+               {/* CORREÇÃO AQUI: Adicionado 'absolute inset-0' para a imagem ficar por cima */}
                <img 
                  src="/sobre-nos.jpg" 
                  alt="Interior do Chest of Wonders" 
-                 className="w-full h-full object-cover"
-                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                 className="absolute inset-0 w-full h-full object-cover"
+                 onError={(e) => { 
+                   // Se der erro, escondemos a imagem para mostrar o placeholder de trás
+                   e.currentTarget.style.display = 'none'; 
+                 }}
                />
             </div>
             {/* Elemento Decorativo Atrás (Sombra sólida rosa) */}
