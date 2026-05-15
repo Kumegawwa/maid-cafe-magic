@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Fredoka:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 15%;
+    --primary: 325 100% 83%;
+    --primary-foreground: 0 0% 15%;
+    --secondary: 193 60% 66%;
+    --secondary-foreground: 0 0% 15%;
+    --muted: 253 65% 81%;
+    --muted-foreground: 253 40% 40%;
+    --accent: 193 60% 90%;
+    --accent-foreground: 0 0% 15%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 253 65% 90%;
+    --input: 253 65% 90%;
+    --ring: 325 100% 83%;
+    --radius: 1.5rem;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground font-body; }
+  h1, h2, h3, h4, h5, h6 { @apply font-display; }
+}
+
+@layer utilities {
+  .shadow-pop { box-shadow: 4px 4px 0px 0px rgba(39, 39, 39, 0.1); }
+  .shadow-pop-hover { box-shadow: 6px 6px 0px 0px rgba(39, 39, 39, 0.2); }
+  .text-shadow-sm { text-shadow: 1px 1px 0px rgba(0,0,0,0.1); }
+  .bg-gradient-pop { background: linear-gradient(135deg, #ffa8da 0%, #bcadf0 100%); }
+
+  /* 3D Transform Utilities para os Cards das Maids */
+  .perspective-1000 { perspective: 1000px; }
+  .transform-style-3d { transform-style: preserve-3d; }
+  .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  .rotate-y-180 { transform: rotateY(180deg); }
+  
+  /* Utilitários para esconder barra de rolagem mas manter funcionalidade */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
