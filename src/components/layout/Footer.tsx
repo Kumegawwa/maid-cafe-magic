@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Separator } from '@/components/ui/separator';
-import { Mail, MapPin, Clock, Instagram, Facebook } from 'lucide-react';
+import { MapPin, Clock, Instagram, Facebook } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const Footer = () => {
@@ -98,8 +98,11 @@ const Footer = () => {
 
         <Separator className="bg-chest-purple/20 mb-8" />
 
-        <div className="flex items-center justify-center text-xs text-chest-dark/60 font-semibold">
+        <div className="flex flex-col items-center justify-center gap-2 text-xs text-chest-dark/60 font-semibold">
           <p>© {currentYear} Chest of Wonders. Todos os direitos reservados.</p>
+          <p className="text-sm font-body">
+            Desenvolvido com 💖 por <a href="https://linkedin.com/in/SEU_LINKEDIN_AQUI" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-chest-pink transition-colors">Kumegawa</a>
+          </p>
         </div>
       </div>
     </footer>
@@ -113,7 +116,7 @@ const SocialLink = ({ href, label, children, color }: { href: string; label: str
     rel="noopener noreferrer" 
     aria-label={label}
     className={cn(
-      "p-2.5 rounded-full text-white transition-all duration-300 hover:scale-110 shadow-sm hover:shadow-pop flex items-center justify-center", // Adicionado flex center
+      "p-2.5 rounded-full text-white transition-all duration-300 hover:scale-110 shadow-sm hover:shadow-pop flex items-center justify-center",
       color
     )}
   >
