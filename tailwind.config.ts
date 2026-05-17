@@ -63,6 +63,7 @@ export default {
       fontFamily: {
         display: ["Fredoka", "cursive"],
         body: ["Baloo 2", "sans-serif"],
+        oleo: ["'Oleo Script'", "system-ui"], // NOVA FONTE REGISTRADA AQUI
       },
       borderRadius: {
         lg: "var(--radius)",

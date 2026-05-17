@@ -30,7 +30,7 @@ const Footer = () => {
             </Link>
             
             <p className="text-sm text-chest-dark/80 font-medium leading-relaxed max-w-xs font-body">
-              Um universo de magia e fofura no coração da Liberdade! 💖
+              Um universe de magia e fofura no coração da Liberdade! 💖
             </p>
 
             {/* Ícones Sociais Coloridos */}
@@ -52,7 +52,6 @@ const Footer = () => {
                 </svg>
               </SocialLink>
               <SocialLink href="https://discord.com/invite/e7saq4Gt8N" color="bg-[#5865F2]" label="Discord">
-                 {/* SVG CORRIGIDO DO DISCORD */}
                  <svg viewBox="0 0 127.14 96.36" fill="currentColor" className="w-[20px] h-[16px] mt-[2px]">
                   <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.11,77.11,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22c.63-15.79-4.16-32.29-18.9-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
                 </svg>
@@ -98,11 +97,23 @@ const Footer = () => {
 
         <Separator className="bg-chest-purple/20 mb-8" />
 
-        <div className="flex flex-col items-center justify-center gap-2 text-xs text-chest-dark/60 font-semibold">
+        {/* Direitos Autorais e Assinatura Minimalista Premium */}
+        <div className="flex flex-col items-center justify-center gap-2 text-xs text-chest-dark/60 font-semibold text-center">
           <p>© {currentYear} Chest of Wonders. Todos os direitos reservados.</p>
-          <p className="text-sm font-body">
-            Desenvolvido com 💖 por <a href="https://www.linkedin.com/in/lucas-kumegawa/" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-chest-pink transition-colors">Kumegawa</a>
-          </p>
+          
+          <div className="text-[11px] font-body tracking-wider text-chest-dark/50 flex items-center gap-1.5 mt-1 select-none">
+            <span>Designed with 💖 by</span>
+            <a 
+              href="https://www.linkedin.com/in/lucas-kumegawa/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="group inline-flex items-center text-chest-dark transition-all duration-300"
+            >
+              <span className="font-oleo text-[15px] font-bold text-chest-purple tracking-normal normal-case ml-1 transition-all duration-300 group-hover:text-chest-pink group-hover:scale-105 block origin-left">
+                Kumegawa
+              </span>
+            </a>
+          </div>
         </div>
       </div>
     </footer>
