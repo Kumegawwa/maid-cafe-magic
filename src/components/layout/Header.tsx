@@ -31,6 +31,19 @@ const Header = () => {
     setIsMenuOpen(false);
   }, [location.pathname]);
 
+  // NOVO: Efeito para travar o scroll da página quando o menu mobile abrir
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    // Limpeza caso o componente seja desmontado
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
+
   const navLinks = [
     { path: '/', label: 'Início' },
     { path: '/experiencia', label: 'Experiência' },
@@ -124,8 +137,9 @@ const Header = () => {
       </div>
 
       {/* Mobile Menu - Pop Overlay */}
+      {/* NOVO: Adicionado 'overflow-y-auto pb-6' para permitir a rolagem interna no menu mobile */}
       <div className={cn(
-        "fixed inset-0 z-40 bg-white transition-all duration-500 lg:hidden flex flex-col pt-24 px-6",
+        "fixed inset-0 z-40 bg-white transition-all duration-500 lg:hidden flex flex-col pt-24 px-6 overflow-y-auto pb-6",
         isMenuOpen ? "opacity-100 pointer-events-auto translate-y-0" : "opacity-0 pointer-events-none -translate-y-4"
       )}>
         {/* Background blobs decorativos */}
@@ -148,7 +162,7 @@ const Header = () => {
           ))}
         </nav>
         
-        <div className="mt-auto mb-8 space-y-4">
+        <div className="mt-auto mb-8 pt-8 space-y-4">
           <div className="p-4 rounded-2xl bg-chest-blue/10 border-2 border-chest-blue space-y-3">
             <div className="flex items-center gap-3">
               <Clock className="text-chest-blue" />
