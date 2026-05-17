@@ -18,6 +18,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [logoError, setLogoError] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -31,14 +32,13 @@ const Header = () => {
     setIsMenuOpen(false);
   }, [location.pathname]);
 
-  // NOVO: Efeito para travar o scroll da página quando o menu mobile abrir
+  // Efeito para travar o scroll da página quando o menu mobile abrir
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
-    // Limpeza caso o componente seja desmontado
     return () => {
       document.body.style.overflow = 'unset';
     };
@@ -68,15 +68,16 @@ const Header = () => {
           {/* Logo Pop Style */}
           <Link to="/" className="flex items-center gap-3 group relative z-50">
             <div className="relative w-12 h-12 rounded-full border-4 border-chest-blue bg-white overflow-hidden shadow-pop group-hover:scale-110 transition-transform">
-               <img 
-                  src="/logo.png" 
-                  alt="Chest of Wonders" 
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                    e.currentTarget.parentElement!.innerHTML = '<span class="text-2xl flex items-center justify-center h-full">🧁</span>';
-                  }}
-                />
+               {logoError ? (
+                  <span className="text-2xl flex items-center justify-center h-full w-full">🧁</span>
+               ) : (
+                  <img 
+                    src="/logo.png" 
+                    alt="Chest of Wonders" 
+                    className="w-full h-full object-cover"
+                    onError={() => setLogoError(true)}
+                  />
+               )}
             </div>
             <div className="hidden sm:block">
               <h1 className="font-display text-2xl font-bold text-chest-dark tracking-wide group-hover:text-chest-pink transition-colors">
@@ -137,7 +138,6 @@ const Header = () => {
       </div>
 
       {/* Mobile Menu - Pop Overlay */}
-      {/* NOVO: Adicionado 'overflow-y-auto pb-6' para permitir a rolagem interna no menu mobile */}
       <div className={cn(
         "fixed inset-0 z-40 bg-white transition-all duration-500 lg:hidden flex flex-col pt-24 px-6 overflow-y-auto pb-6",
         isMenuOpen ? "opacity-100 pointer-events-auto translate-y-0" : "opacity-0 pointer-events-none -translate-y-4"

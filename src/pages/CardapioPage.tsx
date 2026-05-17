@@ -3,7 +3,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Leaf, Wheat, Milk, Wine, Star, Sparkles, AlertCircle, BookOpen } from 'lucide-react';
+import { Leaf, Wheat, Milk, Wine, Sparkles, AlertCircle, BookOpen } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 type FilterType = 'all' | 'vegan' | 'glutenFree' | 'lactoseFree' | 'alcoholic' | 'draw';
@@ -13,7 +13,6 @@ const CardapioPage = () => {
   const [activeFilter, setActiveFilter] = useState<FilterType>('all');
   const [activeCategory, setActiveCategory] = useState<CategoryType>('all');
 
-  // LISTA COMPLETA 100% BASEADA NO PDF
   const menuItems = [
     // --- FRAPÊS MÁGICOS ---
     { name: 'Frapcórnio', price: 'R$ 25,00', description: 'Frutas vermelhas. Decorado com chantilly, calda colorida e confeitos.', category: 'frapes', tags: [], emoji: '🦄' },
@@ -149,16 +148,6 @@ const CardapioPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* CSS Animado para o Botão de PDF */}
-      <style>
-        {`
-          @keyframes soft-pink-glow {
-            0%, 100% { box-shadow: 4px 4px 0px #ffa8da; transform: translate(0, 0); }
-            50% { box-shadow: 6px 6px 0px #bcadf0; transform: translate(-2px, -2px); }
-          }
-        `}
-      </style>
-
       <Header />
       <main className="pt-24 lg:pt-32 pb-20">
         {/* Header da Página */}
@@ -177,8 +166,7 @@ const CardapioPage = () => {
           <div className="flex justify-center">
             <Button 
               size="lg"
-              className="bg-chest-dark text-white font-display font-bold text-lg border-2 border-chest-dark rounded-2xl hover:bg-chest-dark/90" 
-              style={{ animation: 'soft-pink-glow 3s infinite ease-in-out' }}
+              className="bg-chest-dark text-white font-display font-bold text-lg border-2 border-chest-dark rounded-2xl hover:bg-chest-dark/90 animate-soft-glow"
               asChild
             >
               <a href="/Menu.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-8">
@@ -189,10 +177,10 @@ const CardapioPage = () => {
           </div>
         </section>
 
-        {/* Filtros Sticky Pop - CORREÇÃO DE CORTE AQUI */}
+        {/* Filtros Sticky Pop */}
         <section className="sticky top-20 z-40 bg-white/95 backdrop-blur-sm border-y-2 border-chest-purple/20 py-4 mb-12">
           <div className="container mx-auto px-4 space-y-4">
-            {/* Categorias - Adicionado py-2 para evitar corte da animação translate */}
+            {/* Categorias */}
             <div className="flex overflow-x-auto py-2 gap-3 md:justify-center no-scrollbar">
               {categories.map((cat) => (
                 <button

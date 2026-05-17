@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
@@ -52,17 +53,16 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // CORES DO REDESIGN (PANTONE)
         chest: {
-          pink: "#ffa8da", // Pantone 230 C
-          blue: "#73c5dd", // Pantone 630 C
-          purple: "#bcadf0", // Pantone 264 C
-          dark: "#272727", // Pantone 426 C
+          pink: "#ffa8da",
+          blue: "#73c5dd",
+          purple: "#bcadf0",
+          dark: "#272727",
         }
       },
       fontFamily: {
-        display: ["Fredoka", "cursive"], // Fonte de Títulos (Redesign)
-        body: ["Baloo 2", "sans-serif"], // Fonte de Texto (Redesign)
+        display: ["Fredoka", "cursive"],
+        body: ["Baloo 2", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -70,7 +70,7 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        'pop': '4px 4px 0px 0px rgba(39, 39, 39, 1)', // Sombra dura estilo Sticker
+        'pop': '4px 4px 0px 0px rgba(39, 39, 39, 1)',
         'pop-sm': '2px 2px 0px 0px rgba(39, 39, 39, 1)',
         'pop-colored': '4px 4px 0px 0px #bcadf0',
       },
@@ -81,6 +81,7 @@ export default {
         "wiggle": "wiggle 1s ease-in-out infinite",
         "fade-in": "fade-in 0.6s ease-out forwards",
         "fade-in-up": "fade-in-up 0.6s ease-out forwards",
+        "soft-glow": "soft-glow 3s infinite ease-in-out",
       },
       keyframes: {
         "accordion-down": {
@@ -107,8 +108,12 @@ export default {
           from: { opacity: "0", transform: "translateY(20px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
+        "soft-glow": {
+          "0%, 100%": { boxShadow: "4px 4px 0px #ffa8da", transform: "translate(0, 0)" },
+          "50%": { boxShadow: "6px 6px 0px #bcadf0", transform: "translate(-2px, -2px)" },
+        },
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 } satisfies Config;
