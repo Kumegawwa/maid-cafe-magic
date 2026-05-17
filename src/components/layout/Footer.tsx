@@ -101,7 +101,7 @@ const Footer = () => {
         <div className="flex flex-col items-center justify-center gap-2 text-xs text-chest-dark/60 font-semibold">
           <p>© {currentYear} Chest of Wonders. Todos os direitos reservados.</p>
           <p className="text-sm font-body">
-            Desenvolvido com 💖 por <a href="https://linkedin.com/in/SEU_LINKEDIN_AQUI" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-chest-pink transition-colors">Kumegawa</a>
+            Desenvolvido com 💖 por <a href="https://www.linkedin.com/in/lucas-kumegawa/" target="_blank" rel="noopener noreferrer" className="font-bold hover:text-chest-pink transition-colors">Kumegawa</a>
           </p>
         </div>
       </div>
